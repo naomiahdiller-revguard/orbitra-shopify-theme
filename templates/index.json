@@ -1,22 +1,44 @@
 {
+
   "sections": {
+
     "hero": {
+
       "type": "orbitra-hero"
+
     },
+
     "story": {
+
       "type": "orbitra-story"
+
     },
+
     "product": {
+
       "type": "orbitra-product"
+
     },
+
     "faq": {
+
       "type": "orbitra-faq"
+
     }
+
   },
+
   "order": [
+
     "hero",
+
     "story",
+
     "product",
+
     "faq"
+
   ]
+
 }
+

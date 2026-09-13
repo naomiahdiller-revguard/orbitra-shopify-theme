@@ -1,127 +1,203 @@
 <section class="orbitra-hero" id="orbitra-hero">
+
   <div class="orbitra-hero__light orbitra-hero__light--one" aria-hidden="true"></div>
+
   <div class="orbitra-hero__light orbitra-hero__light--two" aria-hidden="true"></div>
 
+ 
+
   <nav class="orbitra-nav">
-    <a href="/" class="orbitra-nav__logo" aria-label="Orbitra home">
-      ORBITRA
-    </a>
+
+    <a href="/" class="orbitra-nav__logo" aria-label="Orbitra home">ORBITRA</a>
+
+ 
 
     <div class="orbitra-nav__links">
+
       <a href="#how-it-works">How It Works</a>
+
       <a href="#orbitra-faq">FAQ</a>
+
     </div>
 
+ 
+
     <a href="#shop-orbitra" class="orbitra-nav__shop">
-      Shop
-      <span aria-hidden="true">↗</span>
+
+      Shop <span aria-hidden="true">↗</span>
+
     </a>
+
   </nav>
+
+ 
 
   <div class="orbitra-hero__inner orbitra-container">
 
     <div class="orbitra-hero__copy">
 
-      <p
-        class="orbitra-eyebrow"
-        data-reveal
-      >
-        THE FUTURE OF PLAY
-      </p>
+      <p class="orbitra-eyebrow" data-reveal>THE FUTURE OF PLAY</p>
 
-      <h1
-        class="orbitra-title orbitra-hero__title"
-        data-reveal
-        data-reveal-delay="1"
-      >
+ 
+
+      <h1 class="orbitra-title orbitra-hero__title" data-reveal data-reveal-delay="1">
+
         A little magic.
+
         <span>Right in your hands.</span>
+
       </h1>
 
-      <p
-        class="orbitra-subtitle orbitra-hero__description"
-        data-reveal
-        data-reveal-delay="2"
-      >
-        Toss it. Guide it. Watch it glow.
-        Orbitra turns a simple throw into a flying experience
+ 
+
+      <p class="orbitra-subtitle orbitra-hero__description" data-reveal data-reveal-delay="2">
+
+        Toss it. Guide it. Watch it glow. Orbitra turns a simple throw into a flying experience
+
         that feels almost impossible.
+
       </p>
 
-      <div
-        class="orbitra-hero__actions"
-        data-reveal
-        data-reveal-delay="3"
-      >
+ 
+
+      <div class="orbitra-hero__actions" data-reveal data-reveal-delay="3">
+
         <a href="#shop-orbitra" class="orbitra-button">
-          Shop Orbitra
-          <span aria-hidden="true">→</span>
+
+          Shop Orbitra <span aria-hidden="true">→</span>
+
         </a>
 
-        <a href="#how-it-works" class="orbitra-hero__secondary">
-          See how it works
-        </a>
+ 
+
+        <a href="#how-it-works" class="orbitra-hero__secondary">See how it works</a>
+
       </div>
 
-      <div
-        class="orbitra-hero__micro"
-        data-reveal
-        data-reveal-delay="3"
-      >
+ 
+
+      <div class="orbitra-hero__micro" data-reveal data-reveal-delay="3">
+
         <span>LED LIGHTING</span>
+
         <i></i>
+
         <span>USB RECHARGEABLE</span>
+
         <i></i>
+
         <span>FLY. CATCH. REPEAT.</span>
+
       </div>
 
     </div>
+
+ 
 
     <div class="orbitra-hero__stage" aria-hidden="true">
 
+      <div class="orbitra-energy-field"></div>
+
+ 
+
+      <div class="orbitra-trail orbitra-trail--blue"></div>
+
+      <div class="orbitra-trail orbitra-trail--violet"></div>
+
+      <div class="orbitra-trail orbitra-trail--pink"></div>
+
+ 
+
+      <div class="orbitra-particles">
+
+        <span></span><span></span><span></span>
+
+        <span></span><span></span><span></span>
+
+      </div>
+
+ 
+
       <div class="orbitra-hero__halo orbitra-hero__halo--outer"></div>
+
       <div class="orbitra-hero__halo orbitra-hero__halo--middle"></div>
+
       <div class="orbitra-hero__halo orbitra-hero__halo--inner"></div>
 
+ 
+
       <div class="orbitra-hero__orb-wrap" data-orbitra-orb>
+
         <img
-          src="{{ 'orb-hero.jpg' | asset_url }}"
+
+          src="{{ 'orbitra-orb.png' | asset_url }}"
+
           alt=""
+
           class="orbitra-hero__orb"
-          width="900"
-          height="900"
+
           loading="eager"
+
         >
+
       </div>
+
+ 
 
       <div class="orbitra-hero__flare"></div>
 
+ 
+
       <div class="orbitra-hero__coordinate orbitra-hero__coordinate--top">
+
         ORBITRA / 01
+
       </div>
 
+ 
+
       <div class="orbitra-hero__coordinate orbitra-hero__coordinate--bottom">
+
         FLIGHT SYSTEM ACTIVE
+
       </div>
 
     </div>
 
   </div>
 
+ 
+
   <div class="orbitra-hero__scroll" aria-hidden="true">
+
     <span>SCROLL TO EXPLORE</span>
+
     <div class="orbitra-hero__scroll-line"></div>
+
   </div>
+
 </section>
 
+ 
+
 {% schema %}
+
 {
+
   "name": "Orbitra Hero",
+
   "settings": [],
+
   "presets": [
+
     {
+
       "name": "Orbitra Hero"
+
     }
+
   ]
+
 }
+
 {% endschema %}

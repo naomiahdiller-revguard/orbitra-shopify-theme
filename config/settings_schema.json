@@ -1,10 +1,19 @@
 [
+
   {
+
     "name": "theme_info",
-    "theme_name": "Orbita",
+
+    "theme_name": "Orbitra",
+
     "theme_version": "1.0.0",
-    "theme_author": "Orbita",
+
+    "theme_author": "Orbitra",
+
     "theme_documentation_url": "",
+
     "theme_support_url": ""
+
   }
+
 ]

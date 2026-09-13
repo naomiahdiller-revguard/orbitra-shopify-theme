@@ -1,0 +1,265 @@
+{% liquid
+
+  assign featured_product = section.settings.product
+
+ 
+
+  if featured_product == blank and collections.all.products.size > 0
+
+    assign featured_product = collections.all.products.first
+
+  endif
+
+%}
+
+ 
+
+<section class="orbitra-product" id="shop-orbitra">
+
+  <div class="orbitra-container orbitra-product__grid">
+
+    <div class="orbitra-product__visual" data-reveal>
+
+      <div class="orbitra-product__glow" aria-hidden="true"></div>
+
+ 
+
+      <img
+
+        src="{{ 'orb-3.jpg' | asset_url }}"
+
+        alt="Close-up view of the Orbitra LED flying orb"
+
+        loading="lazy"
+
+      >
+
+    </div>
+
+ 
+
+    <div class="orbitra-product__content">
+
+      <p class="orbitra-eyebrow" data-reveal>YOUR ORBITRA</p>
+
+ 
+
+      <h2 class="orbitra-section-title orbitra-product__title" data-reveal data-reveal-delay="1">
+
+        Ready when you are.
+
+      </h2>
+
+ 
+
+      {% if featured_product != blank %}
+
+        <div class="orbitra-product__price" data-reveal data-reveal-delay="2">
+
+          <span>{{ featured_product.price | money }}</span>
+
+ 
+
+          {% if featured_product.compare_at_price > featured_product.price %}
+
+            <s>{{ featured_product.compare_at_price | money }}</s>
+
+          {% endif %}
+
+        </div>
+
+      {% endif %}
+
+ 
+
+      <p class="orbitra-subtitle" data-reveal data-reveal-delay="2">
+
+        One blue LED flying orb with the included remote, USB charging cable, and instruction manual.
+
+      </p>
+
+ 
+
+      <ul class="orbitra-product__included" data-reveal data-reveal-delay="2">
+
+        <li>1 blue flying orb</li>
+
+        <li>1 remote control</li>
+
+        <li>1 USB charging cable</li>
+
+        <li>1 instruction manual</li>
+
+      </ul>
+
+ 
+
+      {% if featured_product != blank %}
+
+        {% form 'product', featured_product, class: 'orbitra-product-form', data-reveal: '' %}
+
+          <input
+
+            type="hidden"
+
+            name="id"
+
+            value="{{ featured_product.selected_or_first_available_variant.id }}"
+
+          >
+
+ 
+
+          <div class="orbitra-product-form__row">
+
+            <label for="OrbitraQuantity-{{ section.id }}">Quantity</label>
+
+ 
+
+            <div class="orbitra-quantity">
+
+              <button
+
+                type="button"
+
+                class="orbitra-quantity__button"
+
+                data-quantity-minus
+
+                aria-label="Decrease quantity"
+
+              >−</button>
+
+ 
+
+              <input
+
+                id="OrbitraQuantity-{{ section.id }}"
+
+                type="number"
+
+                name="quantity"
+
+                value="1"
+
+                min="1"
+
+                inputmode="numeric"
+
+                data-quantity-input
+
+              >
+
+ 
+
+              <button
+
+                type="button"
+
+                class="orbitra-quantity__button"
+
+                data-quantity-plus
+
+                aria-label="Increase quantity"
+
+              >+</button>
+
+            </div>
+
+          </div>
+
+ 
+
+          <button
+
+            type="submit"
+
+            name="add"
+
+            class="orbitra-button orbitra-product__add"
+
+            {% unless featured_product.selected_or_first_available_variant.available %}
+
+              disabled
+
+            {% endunless %}
+
+          >
+
+            {% if featured_product.selected_or_first_available_variant.available %}
+
+              Add to cart
+
+            {% else %}
+
+              Sold out
+
+            {% endif %}
+
+          </button>
+
+ 
+
+          {{ form | payment_button }}
+
+        {% endform %}
+
+      {% else %}
+
+        <div class="orbitra-product__setup orbitra-glass">
+
+          Select the Orbitra product in this section's Shopify theme settings.
+
+        </div>
+
+      {% endif %}
+
+ 
+
+      <p class="orbitra-product__note" data-reveal>
+
+        Battery: 3.7V 120mAh · Approx. 8–10 m control distance
+
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+ 
+
+{% schema %}
+
+{
+
+  "name": "Orbitra Product",
+
+  "settings": [
+
+    {
+
+      "type": "product",
+
+      "id": "product",
+
+      "label": "Orbitra product"
+
+    }
+
+  ],
+
+  "presets": [
+
+    {
+
+      "name": "Orbitra Product"
+
+    }
+
+  ]
+
+}
+
+{% endschema %}
