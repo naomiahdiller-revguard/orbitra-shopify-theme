@@ -1,0 +1,1161 @@
+:root {
+  --orbitra-black: #05060a;
+  --orbitra-night: #090d18;
+  --orbitra-deep: #0d1220;
+
+  --orbitra-white: #f8fafc;
+  --orbitra-muted: #9ca6b8;
+
+  --orbitra-blue: #4cb7ff;
+  --orbitra-cyan: #67e8f9;
+  --orbitra-violet: #8b5cf6;
+  --orbitra-pink: #d946ef;
+
+  --orbitra-border: rgba(255, 255, 255, 0.1);
+  --orbitra-glass: rgba(255, 255, 255, 0.06);
+
+  --orbitra-container: 1200px;
+  --orbitra-radius-lg: 32px;
+  --orbitra-radius-md: 22px;
+  --orbitra-radius-sm: 14px;
+
+  --orbitra-transition: 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ---------- RESET ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--orbitra-black);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(76, 183, 255, 0.14),
+      transparent 32%
+    ),
+    linear-gradient(
+      180deg,
+      #05060a 0%,
+      #070a11 45%,
+      #05060a 100%
+    );
+
+  color: var(--orbitra-white);
+
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  overflow-x: hidden;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+/* ---------- GLOBAL SITE ---------- */
+
+.orbitra-site {
+  position: relative;
+  isolation: isolate;
+}
+
+.orbitra-main {
+  position: relative;
+  z-index: 2;
+}
+
+.orbitra-container {
+  width: min(
+    calc(100% - 40px),
+    var(--orbitra-container)
+  );
+
+  margin-inline: auto;
+}
+
+/* ---------- AMBIENT BACKGROUND ---------- */
+
+.orbitra-ambient {
+  position: fixed;
+  inset: 0;
+
+  overflow: hidden;
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+.orbitra-ambient__glow {
+  position: absolute;
+
+  width: 600px;
+  height: 600px;
+
+  border-radius: 50%;
+
+  filter: blur(130px);
+
+  opacity: 0.22;
+
+  will-change: transform;
+}
+
+.orbitra-ambient__glow--blue {
+  top: -220px;
+  left: -200px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(76, 183, 255, 0.85),
+      transparent 65%
+    );
+
+  animation: orbitraDriftBlue 14s ease-in-out infinite alternate;
+}
+
+.orbitra-ambient__glow--violet {
+  right: -260px;
+  top: 18%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(139, 92, 246, 0.75),
+      transparent 65%
+    );
+
+  animation: orbitraDriftViolet 18s ease-in-out infinite alternate;
+}
+
+.orbitra-ambient__noise {
+  position: absolute;
+  inset: 0;
+
+  opacity: 0.025;
+
+  background-image:
+    radial-gradient(
+      rgba(255, 255, 255, 0.8) 0.5px,
+      transparent 0.5px
+    );
+
+  background-size: 5px 5px;
+}
+
+/* ---------- TYPOGRAPHY ---------- */
+
+.orbitra-eyebrow {
+  margin: 0 0 18px;
+
+  font-size: 0.72rem;
+  line-height: 1;
+
+  letter-spacing: 0.2em;
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  color: var(--orbitra-blue);
+}
+
+.orbitra-title {
+  margin: 0;
+
+  font-size: clamp(3.3rem, 8vw, 7.5rem);
+
+  line-height: 0.92;
+
+  letter-spacing: -0.06em;
+
+  font-weight: 650;
+}
+
+.orbitra-subtitle {
+  color: var(--orbitra-muted);
+
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+
+  line-height: 1.7;
+}
+
+/* ---------- BUTTONS ---------- */
+
+.orbitra-button {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  min-height: 52px;
+
+  padding: 0 24px;
+
+  border-radius: 999px;
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(76, 183, 255, 0.98),
+      rgba(139, 92, 246, 0.98)
+    );
+
+  color: white;
+
+  font-size: 0.95rem;
+  font-weight: 700;
+
+  box-shadow:
+    0 18px 50px rgba(76, 183, 255, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+
+  transition:
+    transform var(--orbitra-transition),
+    box-shadow var(--orbitra-transition),
+    filter var(--orbitra-transition);
+}
+
+.orbitra-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 22px 65px rgba(76, 183, 255, 0.28),
+    0 0 45px rgba(139, 92, 246, 0.2);
+
+  filter: brightness(1.05);
+}
+
+.orbitra-button:active {
+  transform: translateY(0);
+}
+
+/* ---------- GLASS ELEMENTS ---------- */
+
+.orbitra-glass {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.075),
+      rgba(255, 255, 255, 0.025)
+    );
+
+  border:
+    1px solid var(--orbitra-border);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 30px 80px rgba(0, 0, 0, 0.28);
+}
+
+/* ---------- SCROLL REVEAL ---------- */
+
+[data-reveal] {
+  opacity: 0;
+
+  transform: translateY(28px);
+
+  transition:
+    opacity 900ms ease,
+    transform 900ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-reveal-delay="1"] {
+  transition-delay: 120ms;
+}
+
+[data-reveal-delay="2"] {
+  transition-delay: 220ms;
+}
+
+[data-reveal-delay="3"] {
+  transition-delay: 320ms;
+}
+
+/* ---------- ACCESSIBILITY ---------- */
+
+.skip-to-content-link {
+  position: fixed;
+
+  top: 12px;
+  left: 12px;
+
+  z-index: 1000;
+
+  padding: 10px 14px;
+
+  border-radius: 10px;
+
+  background: white;
+  color: black;
+
+  transform: translateY(-160%);
+
+  transition: transform 180ms ease;
+}
+
+.skip-to-content-link:focus {
+  transform: translateY(0);
+}
+
+/* ---------- ANIMATIONS ---------- */
+
+@keyframes orbitraDriftBlue {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  100% {
+    transform: translate3d(90px, 70px, 0) scale(1.12);
+  }
+}
+
+@keyframes orbitraDriftViolet {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  100% {
+    transform: translate3d(-90px, 100px, 0) scale(1.14);
+  }
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 768px) {
+  .orbitra-container {
+    width: min(
+      calc(100% - 28px),
+      var(--orbitra-container)
+    );
+  }
+
+  .orbitra-title {
+    font-size: clamp(3rem, 15vw, 5rem);
+  }
+
+  .orbitra-ambient__glow {
+    width: 380px;
+    height: 380px;
+
+    filter: blur(100px);
+  }
+
+  .orbitra-button {
+    min-height: 50px;
+    padding-inline: 22px;
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ==================================================
+   ORBITRA HERO
+================================================== */
+
+.orbitra-hero {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+
+  background:
+    radial-gradient(
+      circle at 76% 46%,
+      rgba(65, 105, 255, 0.13),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 82% 52%,
+      rgba(183, 55, 255, 0.09),
+      transparent 32%
+    ),
+    linear-gradient(
+      135deg,
+      #030509 0%,
+      #060914 52%,
+      #080615 100%
+    );
+}
+
+/* ---------- NAVIGATION ---------- */
+
+.orbitra-nav {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 20;
+
+  width: min(calc(100% - 64px), 1320px);
+
+  transform: translateX(-50%);
+
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+
+  padding: 28px 0;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.orbitra-nav__logo {
+  justify-self: start;
+
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+}
+
+.orbitra-nav__links {
+  display: flex;
+  gap: 34px;
+
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.orbitra-nav__links a {
+  transition: color 220ms ease;
+}
+
+.orbitra-nav__links a:hover {
+  color: white;
+}
+
+.orbitra-nav__shop {
+  justify-self: end;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 17px;
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.05);
+
+  font-size: 0.78rem;
+  font-weight: 650;
+
+  backdrop-filter: blur(14px);
+
+  transition:
+    background 220ms ease,
+    transform 220ms ease;
+}
+
+.orbitra-nav__shop:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+/* ---------- HERO LAYOUT ---------- */
+
+.orbitra-hero__inner {
+  position: relative;
+
+  min-height: 100svh;
+
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  align-items: center;
+
+  padding-top: 110px;
+  padding-bottom: 80px;
+}
+
+.orbitra-hero__copy {
+  position: relative;
+  z-index: 6;
+
+  max-width: 690px;
+}
+
+.orbitra-hero__title {
+  max-width: 800px;
+}
+
+.orbitra-hero__title span {
+  display: block;
+
+  background:
+    linear-gradient(
+      100deg,
+      #ffffff 10%,
+      #9bdcff 48%,
+      #a88cff 78%,
+      #ffffff 110%
+    );
+
+  background-size: 180% auto;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+
+  animation: orbitraTextShimmer 7s linear infinite;
+}
+
+.orbitra-hero__description {
+  max-width: 550px;
+
+  margin: 30px 0 0;
+}
+
+.orbitra-hero__actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+
+  margin-top: 36px;
+}
+
+.orbitra-hero__secondary {
+  position: relative;
+
+  padding: 10px 0;
+
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  color: rgba(255, 255, 255, 0.72);
+
+  transition: color 220ms ease;
+}
+
+.orbitra-hero__secondary::after {
+  content: "";
+
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+
+  width: 100%;
+  height: 1px;
+
+  background: rgba(255, 255, 255, 0.4);
+
+  transform: scaleX(0);
+  transform-origin: right;
+
+  transition: transform 280ms ease;
+}
+
+.orbitra-hero__secondary:hover {
+  color: white;
+}
+
+.orbitra-hero__secondary:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ---------- MICRO SPECS ---------- */
+
+.orbitra-hero__micro {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  margin-top: 46px;
+
+  font-size: 0.61rem;
+  font-weight: 700;
+
+  letter-spacing: 0.13em;
+
+  color: rgba(255, 255, 255, 0.36);
+}
+
+.orbitra-hero__micro i {
+  display: block;
+
+  width: 3px;
+  height: 3px;
+
+  border-radius: 50%;
+
+  background: var(--orbitra-blue);
+
+  box-shadow: 0 0 9px var(--orbitra-blue);
+}
+
+/* ---------- PRODUCT STAGE ---------- */
+
+.orbitra-hero__stage {
+  position: relative;
+
+  height: min(76vw, 780px);
+  max-height: 78vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  perspective: 1000px;
+}
+
+.orbitra-hero__orb-wrap {
+  position: relative;
+  z-index: 5;
+
+  width: min(46vw, 620px);
+
+  animation:
+    orbitraOrbFloat 5.5s ease-in-out infinite;
+
+  will-change: transform;
+}
+
+.orbitra-hero__orb {
+  width: 100%;
+
+  border-radius: 50%;
+
+  filter:
+    saturate(1.12)
+    contrast(1.04)
+    drop-shadow(0 0 40px rgba(79, 166, 255, 0.26))
+    drop-shadow(0 0 100px rgba(128, 68, 255, 0.14));
+
+  -webkit-mask-image:
+    radial-gradient(
+      ellipse at center,
+      black 42%,
+      rgba(0, 0, 0, 0.96) 57%,
+      rgba(0, 0, 0, 0.6) 69%,
+      transparent 82%
+    );
+
+  mask-image:
+    radial-gradient(
+      ellipse at center,
+      black 42%,
+      rgba(0, 0, 0, 0.96) 57%,
+      rgba(0, 0, 0, 0.6) 69%,
+      transparent 82%
+    );
+}
+
+/* ---------- ENERGY HALOS ---------- */
+
+.orbitra-hero__halo {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  border-radius: 50%;
+
+  transform: translate(-50%, -50%);
+
+  pointer-events: none;
+}
+
+.orbitra-hero__halo--outer {
+  width: 92%;
+  aspect-ratio: 1;
+
+  border: 1px solid rgba(95, 173, 255, 0.1);
+
+  box-shadow:
+    0 0 100px rgba(59, 130, 246, 0.05),
+    inset 0 0 100px rgba(139, 92, 246, 0.03);
+
+  animation: orbitraHaloRotate 24s linear infinite;
+}
+
+.orbitra-hero__halo--middle {
+  width: 72%;
+  aspect-ratio: 1;
+
+  border:
+    1px solid rgba(139, 92, 246, 0.12);
+
+  box-shadow:
+    0 0 70px rgba(139, 92, 246, 0.07);
+
+  animation: orbitraHaloRotateReverse 17s linear infinite;
+}
+
+.orbitra-hero__halo--inner {
+  width: 54%;
+  aspect-ratio: 1;
+
+  border: 1px solid rgba(76, 183, 255, 0.16);
+
+  box-shadow:
+    0 0 50px rgba(76, 183, 255, 0.1),
+    inset 0 0 45px rgba(76, 183, 255, 0.05);
+
+  animation: orbitraHaloPulse 4s ease-in-out infinite;
+}
+
+.orbitra-hero__flare {
+  position: absolute;
+  z-index: 2;
+
+  width: 46%;
+  aspect-ratio: 1;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(103, 232, 249, 0.17) 0%,
+      rgba(139, 92, 246, 0.09) 36%,
+      transparent 72%
+    );
+
+  filter: blur(30px);
+
+  animation: orbitraFlarePulse 4s ease-in-out infinite;
+}
+
+/* ---------- DECORATIVE LABELS ---------- */
+
+.orbitra-hero__coordinate {
+  position: absolute;
+
+  font-size: 0.56rem;
+  font-weight: 700;
+
+  letter-spacing: 0.16em;
+
+  color: rgba(255, 255, 255, 0.24);
+}
+
+.orbitra-hero__coordinate--top {
+  top: 14%;
+  right: 4%;
+}
+
+.orbitra-hero__coordinate--bottom {
+  bottom: 13%;
+  left: 6%;
+}
+
+.orbitra-hero__coordinate--bottom::before {
+  content: "";
+
+  display: inline-block;
+
+  width: 5px;
+  height: 5px;
+
+  margin-right: 8px;
+
+  border-radius: 50%;
+
+  background: #67e8f9;
+
+  box-shadow: 0 0 10px #67e8f9;
+}
+
+/* ---------- BACKGROUND LIGHT ---------- */
+
+.orbitra-hero__light {
+  position: absolute;
+  pointer-events: none;
+
+  border-radius: 50%;
+
+  filter: blur(100px);
+}
+
+.orbitra-hero__light--one {
+  width: 460px;
+  height: 460px;
+
+  right: 7%;
+  top: 24%;
+
+  background: rgba(41, 121, 255, 0.12);
+}
+
+.orbitra-hero__light--two {
+  width: 380px;
+  height: 380px;
+
+  right: 23%;
+  bottom: -14%;
+
+  background: rgba(172, 57, 255, 0.09);
+}
+
+/* ---------- SCROLL INDICATOR ---------- */
+
+.orbitra-hero__scroll {
+  position: absolute;
+
+  left: 50%;
+  bottom: 22px;
+
+  z-index: 10;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  transform: translateX(-50%);
+}
+
+.orbitra-hero__scroll span {
+  font-size: 0.52rem;
+
+  letter-spacing: 0.19em;
+
+  color: rgba(255, 255, 255, 0.28);
+}
+
+.orbitra-hero__scroll-line {
+  position: relative;
+
+  width: 1px;
+  height: 28px;
+
+  overflow: hidden;
+
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.orbitra-hero__scroll-line::after {
+  content: "";
+
+  position: absolute;
+  top: -100%;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: white;
+
+  animation: orbitraScrollLine 2s ease-in-out infinite;
+}
+
+/* ---------- HERO ANIMATIONS ---------- */
+
+@keyframes orbitraOrbFloat {
+  0%,
+  100% {
+    transform: translate3d(0, -5px, 0) rotate(-1deg);
+  }
+
+  50% {
+    transform: translate3d(0, 14px, 0) rotate(1.5deg);
+  }
+}
+
+@keyframes orbitraHaloRotate {
+  from {
+    transform:
+      translate(-50%, -50%)
+      rotate(0deg);
+  }
+
+  to {
+    transform:
+      translate(-50%, -50%)
+      rotate(360deg);
+  }
+}
+
+@keyframes orbitraHaloRotateReverse {
+  from {
+    transform:
+      translate(-50%, -50%)
+      rotate(360deg);
+  }
+
+  to {
+    transform:
+      translate(-50%, -50%)
+      rotate(0deg);
+  }
+}
+
+@keyframes orbitraHaloPulse {
+  0%,
+  100% {
+    opacity: 0.45;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0.97);
+  }
+
+  50% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1.04);
+  }
+}
+
+@keyframes orbitraFlarePulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.92);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes orbitraTextShimmer {
+  from {
+    background-position: 0% center;
+  }
+
+  to {
+    background-position: 180% center;
+  }
+}
+
+@keyframes orbitraScrollLine {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(200%);
+  }
+}
+
+/* ---------- HERO TABLET ---------- */
+
+@media (max-width: 980px) {
+  .orbitra-nav {
+    width: calc(100% - 36px);
+  }
+
+  .orbitra-nav__links {
+    display: none;
+  }
+
+  .orbitra-nav {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .orbitra-hero__inner {
+    grid-template-columns: 1fr;
+
+    align-content: center;
+
+    padding-top: 130px;
+    padding-bottom: 90px;
+  }
+
+  .orbitra-hero__copy {
+    text-align: center;
+    margin-inline: auto;
+  }
+
+  .orbitra-hero__description {
+    margin-inline: auto;
+  }
+
+  .orbitra-hero__actions,
+  .orbitra-hero__micro {
+    justify-content: center;
+  }
+
+  .orbitra-hero__stage {
+    height: 52vh;
+    min-height: 390px;
+
+    margin-top: -15px;
+  }
+
+  .orbitra-hero__orb-wrap {
+    width: min(74vw, 520px);
+  }
+}
+
+/* ---------- HERO MOBILE ---------- */
+
+@media (max-width: 600px) {
+  .orbitra-nav {
+    padding-top: 20px;
+    padding-bottom: 18px;
+  }
+
+  .orbitra-nav__logo {
+    font-size: 0.86rem;
+  }
+
+  .orbitra-nav__shop {
+    padding: 8px 14px;
+  }
+
+  .orbitra-hero__inner {
+    display: flex;
+    flex-direction: column;
+
+    padding-top: 120px;
+  }
+
+  .orbitra-hero__copy {
+    width: 100%;
+  }
+
+  .orbitra-hero__title {
+    font-size: clamp(3.1rem, 14vw, 4.8rem);
+  }
+
+  .orbitra-hero__description {
+    margin-top: 22px;
+
+    font-size: 0.96rem;
+
+    max-width: 390px;
+  }
+
+  .orbitra-hero__actions {
+    flex-direction: column;
+
+    gap: 13px;
+
+    margin-top: 28px;
+  }
+
+  .orbitra-hero__actions .orbitra-button {
+    width: min(100%, 330px);
+  }
+
+  .orbitra-hero__micro {
+    display: none;
+  }
+
+  .orbitra-hero__stage {
+    width: 100%;
+
+    height: 42vh;
+    min-height: 320px;
+
+    margin-top: 10px;
+  }
+
+  .orbitra-hero__orb-wrap {
+    width: min(95vw, 450px);
+  }
+
+  .orbitra-hero__coordinate {
+    display: none;
+  }
+
+  .orbitra-hero__scroll {
+    display: none;
+  }
+}
+
+/* ---------- INTERACTIVE HERO MOTION ---------- */
+
+.orbitra-hero__orb-wrap {
+  --mouse-x: 0px;
+  --mouse-y: 0px;
+
+  transform:
+    translate3d(
+      var(--mouse-x),
+      calc(var(--mouse-y) + (var(--hero-scroll, 0) * 38px)),
+      0
+    );
+
+  transition: filter 300ms ease;
+}
+
+.orbitra-hero__stage {
+  transform:
+    translateY(
+      calc(var(--hero-scroll, 0) * 22px)
+    );
+}
+
+.orbitra-hero__copy {
+  transform:
+    translateY(
+      calc(var(--hero-scroll, 0) * -18px)
+    );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbitra-hero__orb-wrap,
+  .orbitra-hero__stage,
+  .orbitra-hero__copy {
+    transform: none;
+  }
+}
