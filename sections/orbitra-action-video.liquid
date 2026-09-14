@@ -1,0 +1,193 @@
+<section class="orbitra-video-page">
+
+  <div class="orbitra-container">
+
+ 
+
+    <nav class="orbitra-video-page__nav">
+
+      <a href="/" class="orbitra-nav__logo" aria-label="Orbitra home">ORBITRA</a>
+
+ 
+
+      <a href="/#shop-orbitra" class="orbitra-video-page__shop">
+
+        Shop Orbitra
+
+        <span aria-hidden="true">→</span>
+
+      </a>
+
+    </nav>
+
+ 
+
+    <div class="orbitra-video-page__intro">
+
+      <p class="orbitra-eyebrow" data-reveal>SEE IT IN ACTION</p>
+
+ 
+
+      <h1 class="orbitra-video-page__title" data-reveal data-reveal-delay="1">
+
+        Throw it.
+
+        <span>Watch it fly.</span>
+
+      </h1>
+
+ 
+
+      <p class="orbitra-subtitle orbitra-video-page__lead" data-reveal data-reveal-delay="2">
+
+        Orbitra is made to move. Watch the throw, the curve, and the catch in real footage.
+
+      </p>
+
+    </div>
+
+ 
+
+    <div class="orbitra-video-shell orbitra-glass" data-reveal>
+
+      <div class="orbitra-video-frame">
+
+ 
+
+        <video
+
+          class="orbitra-action-video"
+
+          data-orbitra-story-video
+
+          autoplay
+
+          muted
+
+          loop
+
+          playsinline
+
+          preload="metadata"
+
+          poster="{{ 'orbita-1.png' | asset_url }}"
+
+          aria-label="Orbitra flying orb in action"
+
+        >
+
+          <source
+
+            src="{{ 'orbita-custom-video-1.mp4' | asset_url }}"
+
+            type="video/mp4"
+
+          >
+
+          Your browser does not support HTML5 video.
+
+        </video>
+
+ 
+
+        <button
+
+          type="button"
+
+          class="orbitra-video-sound"
+
+          data-orbitra-sound-toggle
+
+          aria-pressed="false"
+
+          aria-label="Turn video sound on"
+
+        >
+
+          <span class="orbitra-video-sound__icon" aria-hidden="true">♪</span>
+
+          <span data-orbitra-sound-label>Sound on</span>
+
+        </button>
+
+ 
+
+      </div>
+
+ 
+
+      <div class="orbitra-video-page__caption">
+
+        <span>THROW</span>
+
+        <i></i>
+
+        <span>FLY</span>
+
+        <i></i>
+
+        <span>CATCH</span>
+
+        <i></i>
+
+        <span>REPEAT</span>
+
+      </div>
+
+    </div>
+
+ 
+
+    <div class="orbitra-video-page__cta" data-reveal>
+
+      <p class="orbitra-eyebrow">READY TO TRY IT?</p>
+
+ 
+
+      <h2>
+
+        Put Orbitra in motion.
+
+      </h2>
+
+ 
+
+      <a href="/#shop-orbitra" class="orbitra-button">
+
+        Shop Orbitra
+
+        <span aria-hidden="true">→</span>
+
+      </a>
+
+    </div>
+
+ 
+
+  </div>
+
+</section>
+
+ 
+
+{% schema %}
+
+{
+
+  "name": "Orbitra Action Video",
+
+  "settings": [],
+
+  "presets": [
+
+    {
+
+      "name": "Orbitra Action Video"
+
+    }
+
+  ]
+
+}
+
+{% endschema %}

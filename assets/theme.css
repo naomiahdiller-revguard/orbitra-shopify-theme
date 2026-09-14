@@ -4840,3 +4840,654 @@ button {
   }
 
 }
+
+/* =========================================================
+
+   ORBITRA HOMEPAGE - SEE IT IN ACTION CTA
+
+   ========================================================= */
+
+ 
+
+.orbitra-story--cta {
+
+  padding-top: clamp(80px, 10vw, 150px);
+
+}
+
+ 
+
+.orbitra-action-card {
+
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.82fr);
+
+  gap: clamp(34px, 6vw, 90px);
+
+  align-items: center;
+
+  overflow: hidden;
+
+  padding: clamp(30px, 5vw, 70px);
+
+  border-radius: 34px;
+
+}
+
+ 
+
+.orbitra-action-card__copy {
+
+  position: relative;
+
+  z-index: 2;
+
+}
+
+ 
+
+.orbitra-action-card__text {
+
+  max-width: 610px;
+
+  margin: 24px 0 0;
+
+}
+
+ 
+
+.orbitra-action-card__button {
+
+  margin-top: 32px;
+
+}
+
+ 
+
+.orbitra-action-card__visual {
+
+  position: relative;
+
+  min-width: 0;
+
+  aspect-ratio: 1 / 1;
+
+  display: grid;
+
+  place-items: center;
+
+}
+
+ 
+
+.orbitra-action-card__glow {
+
+  position: absolute;
+
+  inset: 13%;
+
+  border-radius: 50%;
+
+  background:
+
+    radial-gradient(
+
+      circle,
+
+      rgba(76, 183, 255, 0.30),
+
+      rgba(139, 92, 246, 0.12) 48%,
+
+      transparent 72%
+
+    );
+
+  filter: blur(28px);
+
+}
+
+ 
+
+.orbitra-action-card__image {
+
+  position: relative;
+
+  z-index: 1;
+
+  width: min(100%, 520px);
+
+  height: auto;
+
+  object-fit: contain;
+
+  filter: drop-shadow(0 30px 70px rgba(0, 0, 0, 0.44));
+
+}
+
+ 
+
+.orbitra-action-card__play {
+
+  position: absolute;
+
+  z-index: 3;
+
+  left: 50%;
+
+  top: 50%;
+
+  width: 72px;
+
+  height: 72px;
+
+  display: grid;
+
+  place-items: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.20);
+
+  border-radius: 50%;
+
+  transform: translate(-50%, -50%);
+
+  background: rgba(5, 7, 12, 0.72);
+
+  backdrop-filter: blur(12px);
+
+  -webkit-backdrop-filter: blur(12px);
+
+  box-shadow:
+
+    0 0 40px rgba(76, 183, 255, 0.22),
+
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+
+}
+
+ 
+
+.orbitra-action-card__play span {
+
+  margin-left: 4px;
+
+  font-size: 1.35rem;
+
+}
+
+ 
+
+ 
+
+/* =========================================================
+
+   ORBITRA - SEE IT IN ACTION PAGE
+
+   ========================================================= */
+
+ 
+
+.orbitra-video-page {
+
+  min-height: 100vh;
+
+  padding: 0 0 clamp(80px, 10vw, 150px);
+
+  overflow: hidden;
+
+}
+
+ 
+
+.orbitra-video-page__nav {
+
+  min-height: 88px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 24px;
+
+}
+
+ 
+
+.orbitra-video-page__shop {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 11px 17px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius: 999px;
+
+  color: var(--orbitra-white);
+
+  font-size: 0.88rem;
+
+  font-weight: 700;
+
+  transition:
+
+    transform var(--orbitra-transition),
+
+    border-color var(--orbitra-transition),
+
+    background var(--orbitra-transition);
+
+}
+
+ 
+
+.orbitra-video-page__shop:hover {
+
+  transform: translateY(-1px);
+
+  border-color: rgba(76, 183, 255, 0.45);
+
+  background: rgba(255, 255, 255, 0.04);
+
+}
+
+ 
+
+.orbitra-video-page__intro {
+
+  max-width: 900px;
+
+  padding: clamp(50px, 8vw, 110px) 0 clamp(35px, 6vw, 75px);
+
+}
+
+ 
+
+.orbitra-video-page__title {
+
+  margin: 0;
+
+  font-size: clamp(3.2rem, 8.2vw, 7.5rem);
+
+  line-height: 0.92;
+
+  letter-spacing: -0.06em;
+
+  font-weight: 650;
+
+}
+
+ 
+
+.orbitra-video-page__title span {
+
+  display: block;
+
+  color: #a9dfff;
+
+}
+
+ 
+
+.orbitra-video-page__lead {
+
+  max-width: 680px;
+
+  margin: 27px 0 0;
+
+}
+
+ 
+
+.orbitra-video-shell {
+
+  overflow: hidden;
+
+  border-radius: 32px;
+
+}
+
+ 
+
+.orbitra-video-frame {
+
+  position: relative;
+
+  width: 100%;
+
+ 
+
+  /* IMPORTANT:
+
+     The video stays landscape on every screen size.
+
+     It is never forced into a portrait container.
+
+  */
+
+  aspect-ratio: 16 / 9;
+
+ 
+
+  overflow: hidden;
+
+  background: #020307;
+
+}
+
+ 
+
+.orbitra-action-video {
+
+  display: block;
+
+  width: 100%;
+
+  height: 100%;
+
+ 
+
+  /* Preserves the complete landscape video without distortion. */
+
+  object-fit: contain;
+
+ 
+
+  background: #020307;
+
+}
+
+ 
+
+.orbitra-video-sound {
+
+  position: absolute;
+
+  z-index: 4;
+
+  right: clamp(14px, 2.5vw, 26px);
+
+  bottom: clamp(14px, 2.5vw, 26px);
+
+  min-height: 46px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 0 16px;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  border-radius: 999px;
+
+  background: rgba(4, 6, 11, 0.76);
+
+  color: white;
+
+  font-size: 0.86rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(14px);
+
+  -webkit-backdrop-filter: blur(14px);
+
+  box-shadow:
+
+    0 12px 35px rgba(0, 0, 0, 0.28),
+
+    inset 0 1px 0 rgba(255, 255, 255, 0.10);
+
+  transition:
+
+    transform var(--orbitra-transition),
+
+    background var(--orbitra-transition),
+
+    border-color var(--orbitra-transition);
+
+}
+
+ 
+
+.orbitra-video-sound:hover {
+
+  transform: translateY(-1px);
+
+  border-color: rgba(103, 232, 249, 0.46);
+
+  background: rgba(8, 13, 22, 0.88);
+
+}
+
+ 
+
+.orbitra-video-sound__icon {
+
+  font-size: 1rem;
+
+  line-height: 1;
+
+}
+
+ 
+
+.orbitra-video-page__caption {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 12px;
+
+  padding: 19px 24px 21px;
+
+  color: rgba(248, 250, 252, 0.70);
+
+  font-size: 0.72rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.18em;
+
+}
+
+ 
+
+.orbitra-video-page__caption i {
+
+  width: 4px;
+
+  height: 4px;
+
+  border-radius: 50%;
+
+  background: var(--orbitra-blue);
+
+}
+
+ 
+
+.orbitra-video-page__cta {
+
+  max-width: 760px;
+
+  margin: clamp(70px, 10vw, 130px) auto 0;
+
+  text-align: center;
+
+}
+
+ 
+
+.orbitra-video-page__cta h2 {
+
+  margin: 0;
+
+  font-size: clamp(2.4rem, 5.5vw, 5rem);
+
+  line-height: 0.98;
+
+  letter-spacing: -0.05em;
+
+}
+
+ 
+
+.orbitra-video-page__cta .orbitra-button {
+
+  margin-top: 30px;
+
+}
+
+ 
+
+ 
+
+/* =========================================================
+
+   MOBILE
+
+   ========================================================= */
+
+ 
+
+@media (max-width: 760px) {
+
+ 
+
+  .orbitra-action-card {
+
+    grid-template-columns: 1fr;
+
+    padding: 28px 22px;
+
+  }
+
+ 
+
+  .orbitra-action-card__visual {
+
+    width: 100%;
+
+    max-width: 420px;
+
+    margin: 4px auto 0;
+
+  }
+
+ 
+
+  .orbitra-action-card__play {
+
+    width: 62px;
+
+    height: 62px;
+
+  }
+
+ 
+
+  .orbitra-video-page__nav {
+
+    min-height: 72px;
+
+  }
+
+ 
+
+  .orbitra-video-page__shop {
+
+    padding: 9px 13px;
+
+    font-size: 0.78rem;
+
+  }
+
+ 
+
+  .orbitra-video-page__intro {
+
+    padding-top: 48px;
+
+  }
+
+ 
+
+  .orbitra-video-shell {
+
+    border-radius: 20px;
+
+  }
+
+ 
+
+  .orbitra-video-frame {
+
+    /* Still landscape on mobile. */
+
+    aspect-ratio: 16 / 9;
+
+  }
+
+ 
+
+  .orbitra-action-video {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: contain;
+
+  }
+
+ 
+
+  .orbitra-video-sound {
+
+    right: 10px;
+
+    bottom: 10px;
+
+    min-height: 40px;
+
+    padding: 0 12px;
+
+    font-size: 0.75rem;
+
+  }
+
+ 
+
+  .orbitra-video-page__caption {
+
+    gap: 8px;
+
+    padding: 15px 12px 17px;
+
+    font-size: 0.62rem;
+
+    letter-spacing: 0.12em;
+
+  }
+
+}
+

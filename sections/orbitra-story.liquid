@@ -1,94 +1,84 @@
-<section class="orbitra-story" id="how-it-works">
+<section class="orbitra-story orbitra-story--cta" id="how-it-works">
 
   <div class="orbitra-container">
 
  
 
-    <div class="orbitra-story__top">
+    <div class="orbitra-action-card orbitra-glass" data-reveal>
 
-      <div class="orbitra-story__intro">
+      <div class="orbitra-action-card__copy">
 
-        <p class="orbitra-eyebrow" data-reveal>MEET ORBITRA</p>
+        <p class="orbitra-eyebrow">SEE IT IN ACTION</p>
 
  
 
-        <h2 class="orbitra-section-title" data-reveal data-reveal-delay="1">
+        <h2 class="orbitra-section-title">
 
-          Not just something you watch.
+          Watch Orbitra
 
-          <span>Something you control.</span>
+          <span>take flight.</span>
 
         </h2>
 
  
 
-        <p class="orbitra-subtitle orbitra-story__lead" data-reveal data-reveal-delay="2">
+        <p class="orbitra-subtitle orbitra-action-card__text">
 
-          Start the rotor, give Orbitra a controlled toss, and experiment with angle and direction
+          See the throw, the curve, and the catch without loading the full video
 
-          to create different flight paths.
+          on the homepage.
 
         </p>
 
  
 
-        <div class="orbitra-story__cue" data-reveal data-reveal-delay="3">
+        <a
 
-          <span class="orbitra-story__cue-dot"></span>
+          href="/pages/see-it-in-action"
 
-          <span>REAL ORBITRA FOOTAGE</span>
+          class="orbitra-button orbitra-action-card__button"
 
-        </div>
+        >
+
+          Watch Orbitra in action
+
+          <span aria-hidden="true">→</span>
+
+        </a>
 
       </div>
 
  
 
-      <div class="orbitra-story__visual orbitra-glass" data-reveal>
+      <div class="orbitra-action-card__visual" aria-hidden="true">
 
-        <video
+        <div class="orbitra-action-card__glow"></div>
 
-          class="orbitra-story__video"
+ 
 
-          autoplay
+        <img
 
-          muted
+          src="{{ 'orbita-1.png' | asset_url }}"
 
-          loop
+          alt=""
 
-          playsinline
+          class="orbitra-action-card__image"
 
-          preload="metadata"
+          loading="lazy"
 
-          poster="{{ 'orbita-1.png' | asset_url }}"
+          width="1200"
 
-          aria-label="Orbitra flying orb in action"
+          height="1200"
 
         >
 
-          <source src="{{ 'orbita-custom-video-1.mp4' | asset_url }}" type="video/mp4">
-
-          Your browser does not support HTML5 video.
-
-        </video>
-
  
 
-        <div class="orbitra-story__visual-shade" aria-hidden="true"></div>
+        <div class="orbitra-action-card__play">
 
- 
-
-        <div class="orbitra-story__video-badge">
-
-          <span class="orbitra-story__video-badge-dot"></span>
-
-          IN MOTION
+          <span>▶</span>
 
         </div>
-
- 
-
-        <p class="orbitra-story__visual-label">THROW · FLY · CATCH · REPEAT</p>
 
       </div>
 
@@ -178,10 +168,15 @@
 
   "presets": [
 
-    { "name": "Orbitra Story" }
+    {
+
+      "name": "Orbitra Story"
+
+    }
 
   ]
 
 }
 
 {% endschema %}
+

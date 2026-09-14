@@ -1,0 +1,22 @@
+{
+
+  "sections": {
+
+    "main": {
+
+      "type": "orbitra-action-video",
+
+      "settings": {}
+
+    }
+
+  },
+
+  "order": [
+
+    "main"
+
+  ]
+
+}
+
