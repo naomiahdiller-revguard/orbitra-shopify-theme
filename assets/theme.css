@@ -3735,3 +3735,406 @@ button {
   }
 
 }
+
+/* =========================================================
+   ORBITRA STORY VIDEO — FINAL OVERRIDE
+   ========================================================= */
+
+.orbitra-story {
+  position: relative;
+
+  padding:
+    clamp(100px, 9vw, 165px)
+    0
+    clamp(100px, 9vw, 145px);
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 76% 40%,
+      rgba(66, 100, 255, 0.09),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 90% 52%,
+      rgba(157, 64, 255, 0.06),
+      transparent 30%
+    ),
+    linear-gradient(
+      180deg,
+      #06080d 0%,
+      #080a10 100%
+    );
+}
+
+
+/* ---------- DESKTOP TWO-COLUMN LAYOUT ---------- */
+
+.orbitra-story__layout {
+  display: grid;
+
+  grid-template-columns:
+    minmax(420px, 0.82fr)
+    minmax(620px, 1.18fr);
+
+  gap: clamp(60px, 7vw, 125px);
+
+  align-items: center;
+}
+
+
+.orbitra-story__intro {
+  position: relative;
+  z-index: 3;
+
+  max-width: 680px;
+}
+
+
+.orbitra-story__headline {
+  max-width: 680px;
+}
+
+
+.orbitra-story__headline span {
+  color: #9fdcff;
+}
+
+
+.orbitra-story__lead {
+  max-width: 620px;
+
+  margin-top: 34px;
+
+  font-size: clamp(1rem, 1.3vw, 1.18rem);
+
+  line-height: 1.8;
+}
+
+
+/* ---------- VIDEO AREA ---------- */
+
+.orbitra-story__media {
+  position: relative;
+
+  width: 100%;
+
+  min-width: 0;
+}
+
+
+.orbitra-story__video-shell {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 16 / 9;
+
+  overflow: hidden;
+
+  border-radius: 34px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.10);
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(66, 104, 255, 0.10),
+      transparent 52%
+    ),
+    #05070d;
+
+  box-shadow:
+    0 35px 100px rgba(0, 0, 0, 0.38),
+    0 0 70px rgba(84, 103, 255, 0.08);
+
+  isolation: isolate;
+}
+
+
+.orbitra-story__video {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  background: #05060a;
+}
+
+
+/* subtle visual polish */
+
+.orbitra-story__video-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(2, 4, 9, 0.14),
+      transparent 20%,
+      transparent 78%,
+      rgba(13, 7, 28, 0.18)
+    ),
+    linear-gradient(
+      180deg,
+      transparent 68%,
+      rgba(2, 4, 10, 0.18)
+    );
+}
+
+
+/* ---------- IN MOTION BADGE ---------- */
+
+.orbitra-story__motion-badge {
+  position: absolute;
+
+  z-index: 5;
+
+  top: 28px;
+  right: 28px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  padding:
+    13px
+    20px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.13);
+
+  border-radius: 999px;
+
+  background:
+    rgba(5, 7, 14, 0.67);
+
+  backdrop-filter:
+    blur(14px);
+
+  -webkit-backdrop-filter:
+    blur(14px);
+
+  color:
+    rgba(255, 255, 255, 0.72);
+
+  font-size: 0.68rem;
+
+  font-weight: 750;
+
+  letter-spacing: 0.14em;
+}
+
+
+.orbitra-story__motion-badge span {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #65e7f7;
+
+  box-shadow:
+    0 0 12px
+    rgba(101, 231, 247, 0.8);
+}
+
+
+/* ---------- LOWER VIDEO LABEL ---------- */
+
+.orbitra-story__video-label {
+  position: absolute;
+
+  z-index: 5;
+
+  left: 30px;
+  bottom: 28px;
+
+  color:
+    rgba(255, 255, 255, 0.70);
+
+  font-size: 0.67rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.13em;
+}
+
+
+/* ---------- PUT STEPS BELOW VIDEO SECTION ---------- */
+
+.orbitra-story__layout + .orbitra-container {
+  margin-top:
+    clamp(75px, 8vw, 120px);
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+  .orbitra-story__layout {
+    grid-template-columns:
+      minmax(330px, 0.85fr)
+      minmax(500px, 1.15fr);
+
+    gap: 50px;
+  }
+
+
+  .orbitra-story__headline {
+    font-size:
+      clamp(
+        3rem,
+        5.4vw,
+        4.8rem
+      );
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+  .orbitra-story {
+    padding:
+      100px
+      0
+      90px;
+  }
+
+
+  .orbitra-story__layout {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 44px;
+
+    align-items: stretch;
+  }
+
+
+  .orbitra-story__intro {
+    width: 100%;
+
+    max-width: none;
+  }
+
+
+  .orbitra-story__headline {
+    max-width: 540px;
+  }
+
+
+  .orbitra-story__lead {
+    max-width: 520px;
+
+    margin-top: 26px;
+  }
+
+
+  /*
+    Important:
+    video intentionally goes UNDER the words
+    on mobile.
+  */
+
+  .orbitra-story__media {
+    width: 100%;
+  }
+
+
+  .orbitra-story__video-shell {
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    border-radius: 24px;
+  }
+
+
+  .orbitra-story__motion-badge {
+    top: 15px;
+    right: 15px;
+
+    padding:
+      9px
+      13px;
+
+    font-size: 0.55rem;
+  }
+
+
+  .orbitra-story__video-label {
+    left: 16px;
+    bottom: 15px;
+
+    font-size: 0.52rem;
+  }
+
+
+  .orbitra-story__layout + .orbitra-container {
+    margin-top: 72px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 520px) {
+
+  .orbitra-story__video-shell {
+    /*
+      Your video stays landscape instead
+      of being stretched into a portrait box.
+    */
+
+    aspect-ratio: 16 / 9;
+
+    border-radius: 18px;
+  }
+
+
+  .orbitra-story__motion-badge {
+    display: none;
+  }
+
+
+  .orbitra-story__video-label {
+    font-size: 0.46rem;
+
+    letter-spacing: 0.10em;
+  }
+
+}
