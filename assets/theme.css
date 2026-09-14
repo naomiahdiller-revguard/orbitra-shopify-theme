@@ -4138,3 +4138,116 @@ button {
   }
 
 }
+
+/* =========================================================
+   ORBITRA STORY SOUND CONTROL
+   ========================================================= */
+
+.orbitra-story__sound {
+  position: absolute;
+  z-index: 6;
+
+  right: 28px;
+  bottom: 26px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  min-height: 44px;
+
+  padding: 10px 15px;
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+
+  color: rgba(255, 255, 255, 0.88);
+
+  background: rgba(5, 7, 14, 0.7);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  font: inherit;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+
+  cursor: pointer;
+
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.orbitra-story__sound:hover {
+  background: rgba(20, 26, 43, 0.9);
+  border-color: rgba(101, 231, 247, 0.45);
+  transform: translateY(-1px);
+}
+
+.orbitra-story__sound-icon {
+  display: grid;
+  place-items: center;
+}
+
+.orbitra-story__sound svg {
+  display: block;
+}
+
+.orbitra-story__sound-on {
+  display: none !important;
+}
+
+.orbitra-story__sound.is-unmuted .orbitra-story__sound-off {
+  display: none !important;
+}
+
+.orbitra-story__sound.is-unmuted .orbitra-story__sound-on {
+  display: block !important;
+}
+
+
+/* Mobile */
+
+@media (max-width: 800px) {
+
+  .orbitra-story__sound {
+    right: 14px;
+    bottom: 13px;
+
+    min-height: 38px;
+
+    padding: 8px 11px;
+
+    font-size: 0.58rem;
+  }
+
+  /*
+    Move the THROW · FLY · CATCH label slightly
+    so it doesn't collide with the sound control.
+  */
+
+  .orbitra-story__video-label {
+    left: 14px;
+    bottom: 15px;
+
+    max-width: calc(100% - 125px);
+  }
+}
+
+
+@media (max-width: 420px) {
+
+  .orbitra-story__sound [data-orbitra-sound-label] {
+    display: none;
+  }
+
+  .orbitra-story__sound {
+    width: 38px;
+    padding: 0;
+  }
+
+}

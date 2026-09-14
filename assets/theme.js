@@ -635,3 +635,48 @@ document.querySelectorAll('[data-product-gallery]').forEach((gallery) => {
   showSlide(0);
 
 });
+
+/* =========================================================
+   ORBITRA STORY VIDEO SOUND
+   ========================================================= */
+
+document.querySelectorAll('[data-orbitra-sound-toggle]').forEach((button) => {
+  const videoShell = button.closest('.orbitra-story__video-shell');
+
+  if (!videoShell) return;
+
+  const video = videoShell.querySelector('[data-orbitra-story-video]');
+  const label = button.querySelector('[data-orbitra-sound-label]');
+
+  if (!video) return;
+
+  const updateSoundButton = () => {
+    const soundIsOn = !video.muted;
+
+    button.classList.toggle('is-unmuted', soundIsOn);
+    button.setAttribute('aria-pressed', String(soundIsOn));
+
+    button.setAttribute(
+      'aria-label',
+      soundIsOn ? 'Mute video' : 'Turn video sound on'
+    );
+
+    if (label) {
+      label.textContent = soundIsOn ? 'Sound off' : 'Sound on';
+    }
+  };
+
+
+  button.addEventListener('click', () => {
+    video.muted = !video.muted;
+
+    if (video.paused) {
+      video.play().catch(() => {});
+    }
+
+    updateSoundButton();
+  });
+
+
+  updateSoundButton();
+});
