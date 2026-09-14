@@ -1,265 +1,187 @@
 <section class="orbitra-story" id="how-it-works">
 
-  <div class="orbitra-container orbitra-story__layout">
+  <div class="orbitra-container">
 
-    <!-- COPY -->
-    <div class="orbitra-story__intro">
+ 
 
-      <p
-        class="orbitra-eyebrow"
-        data-reveal
-      >
-        MEET ORBITRA
-      </p>
+    <div class="orbitra-story__top">
 
-      <h2
-        class="orbitra-section-title orbitra-story__headline"
-        data-reveal
-        data-reveal-delay="1"
-      >
-        Not just something
-        <br>
-        you watch.
-        <span>Something</span>
-        <br>
-        <span>you control.</span>
-      </h2>
+      <div class="orbitra-story__intro">
 
-      <p
-        class="orbitra-subtitle orbitra-story__lead"
-        data-reveal
-        data-reveal-delay="2"
-      >
-        Start the rotor, give Orbitra a controlled toss, and
-        experiment with angle and direction to create different
-        flight paths.
-      </p>
+        <p class="orbitra-eyebrow" data-reveal>MEET ORBITRA</p>
 
-    </div>
+ 
 
+        <h2 class="orbitra-section-title" data-reveal data-reveal-delay="1">
 
-    <!-- VIDEO -->
-    <div
-      class="orbitra-story__media"
-      data-reveal
-      data-reveal-delay="1"
-    >
+          Not just something you watch.
 
-      <div class="orbitra-story__video-shell">
+          <span>Something you control.</span>
+
+        </h2>
+
+ 
+
+        <p class="orbitra-subtitle orbitra-story__lead" data-reveal data-reveal-delay="2">
+
+          Start the rotor, give Orbitra a controlled toss, and experiment with angle and direction
+
+          to create different flight paths.
+
+        </p>
+
+ 
+
+        <div class="orbitra-story__cue" data-reveal data-reveal-delay="3">
+
+          <span class="orbitra-story__cue-dot"></span>
+
+          <span>REAL ORBITRA FOOTAGE</span>
+
+        </div>
+
+      </div>
+
+ 
+
+      <div class="orbitra-story__visual orbitra-glass" data-reveal>
 
         <video
-          class="orbitra-story__video"
-          data-orbitra-story-video
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-          poster="{{ 'orbita-1.png' | asset_url }}"
-          aria-label="Orbitra flying orb in motion"
-        >
-          <source
-            src="{{ 'orbita-custom-video-1.mp4' | asset_url }}"
-            type="video/mp4"
-          >
 
-          Your browser does not support embedded video.
+          class="orbitra-story__video"
+
+          autoplay
+
+          muted
+
+          loop
+
+          playsinline
+
+          preload="metadata"
+
+          poster="{{ 'orbita-1.png' | asset_url }}"
+
+          aria-label="Orbitra flying orb in action"
+
+        >
+
+          <source src="{{ 'orbita-custom-video-1.mp4' | asset_url }}" type="video/mp4">
+
+          Your browser does not support HTML5 video.
+
         </video>
 
+ 
 
-        <!-- DECORATIVE OVERLAY -->
-        <div
-          class="orbitra-story__video-overlay"
-          aria-hidden="true"
-        ></div>
+        <div class="orbitra-story__visual-shade" aria-hidden="true"></div>
 
+ 
 
-        <!-- TOP RIGHT BADGE -->
-        <div
-          class="orbitra-story__motion-badge"
-          aria-hidden="true"
-        >
-          <span></span>
+        <div class="orbitra-story__video-badge">
+
+          <span class="orbitra-story__video-badge-dot"></span>
+
           IN MOTION
+
         </div>
 
+ 
 
-        <!-- SOUND CONTROL -->
-        <button
-          class="orbitra-story__sound"
-          type="button"
-          data-orbitra-sound-toggle
-          aria-label="Turn video sound on"
-          aria-pressed="false"
-        >
-          <span class="orbitra-story__sound-icon" aria-hidden="true">
-
-            <svg
-              class="orbitra-story__sound-off"
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M11 5 6 9H3v6h3l5 4V5Z"></path>
-              <path d="m18 9-6 6"></path>
-              <path d="m12 9 6 6"></path>
-            </svg>
-
-            <svg
-              class="orbitra-story__sound-on"
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M11 5 6 9H3v6h3l5 4V5Z"></path>
-              <path d="M15.5 8.5a5 5 0 0 1 0 7"></path>
-              <path d="M18 6a8.5 8.5 0 0 1 0 12"></path>
-            </svg>
-
-          </span>
-
-          <span data-orbitra-sound-label>
-            Sound on
-          </span>
-        </button>
-
-
-        <!-- LOWER LABEL -->
-        <div
-          class="orbitra-story__video-label"
-          aria-hidden="true"
-        >
-          THROW · FLY · CATCH · REPEAT
-        </div>
+        <p class="orbitra-story__visual-label">THROW · FLY · CATCH · REPEAT</p>
 
       </div>
 
     </div>
 
-  </div>
-
-
-  <!-- STEPS -->
-  <div class="orbitra-container">
+ 
 
     <div class="orbitra-steps">
 
-      <article
-        class="orbitra-step"
-        data-reveal
-      >
+      <article class="orbitra-step" data-reveal>
+
         <span class="orbitra-step__number">01</span>
 
         <h3>Power it on.</h3>
 
-        <p>
-          Switch on Orbitra, hold the center axis,
-          and spin the wheel to start the rotor.
-        </p>
+        <p>Switch on Orbitra, hold the center axis, and spin the wheel to start the rotor.</p>
+
       </article>
 
+ 
 
-      <article
-        class="orbitra-step"
-        data-reveal
-        data-reveal-delay="1"
-      >
+      <article class="orbitra-step" data-reveal data-reveal-delay="1">
+
         <span class="orbitra-step__number">02</span>
 
         <h3>Give it a toss.</h3>
 
-        <p>
-          Use a controlled throw and change the angle
-          to explore different flight paths.
-        </p>
+        <p>Use a controlled throw and change the angle to explore different flight paths.</p>
+
       </article>
 
+ 
 
-      <article
-        class="orbitra-step"
-        data-reveal
-        data-reveal-delay="2"
-      >
+      <article class="orbitra-step" data-reveal data-reveal-delay="2">
+
         <span class="orbitra-step__number">03</span>
 
         <h3>Guide the flight.</h3>
 
-        <p>
-          Experiment with direction, distance, and timing
-          while the LEDs light up the motion.
-        </p>
+        <p>Experiment with direction, distance, and timing while the LEDs light up the motion.</p>
+
       </article>
 
+ 
 
-      <article
-        class="orbitra-step"
-        data-reveal
-        data-reveal-delay="3"
-      >
+      <article class="orbitra-step" data-reveal data-reveal-delay="3">
+
         <span class="orbitra-step__number">04</span>
 
         <h3>Catch. Repeat.</h3>
 
-        <p>
-          Catch Orbitra, reset your throw,
-          and try a new route or return path.
-        </p>
+        <p>Catch Orbitra, reset your throw, and try a new route, trick, or return path.</p>
+
       </article>
 
     </div>
 
+ 
 
-    <!-- SPECS -->
-    <div
-      class="orbitra-spec-strip orbitra-glass"
-      data-reveal
-    >
+    <div class="orbitra-spec-strip orbitra-glass" data-reveal>
 
-      <div>
-        <strong>6–8 MIN</strong>
-        <span>Typical flight time</span>
-      </div>
+      <div><strong>6–8 MIN</strong><span>Typical flight time</span></div>
 
-      <div>
-        <strong>30–35 MIN</strong>
-        <span>Charging time</span>
-      </div>
+      <div><strong>30–35 MIN</strong><span>Charging time</span></div>
 
-      <div>
-        <strong>9.5 × 9.5 CM</strong>
-        <span>Compact size</span>
-      </div>
+      <div><strong>9.5 × 9.5 CM</strong><span>Compact size</span></div>
 
-      <div>
-        <strong>USB</strong>
-        <span>Rechargeable</span>
-      </div>
+      <div><strong>USB</strong><span>Rechargeable</span></div>
 
     </div>
+
+ 
 
   </div>
 
 </section>
 
+ 
 
 {% schema %}
+
 {
+
   "name": "Orbitra Story",
+
   "settings": [],
+
   "presets": [
-    {
-      "name": "Orbitra Story"
-    }
+
+    { "name": "Orbitra Story" }
+
   ]
+
 }
+
 {% endschema %}

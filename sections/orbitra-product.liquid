@@ -22,9 +22,13 @@
 
     <div class="orbitra-product-gallery" data-product-gallery data-reveal tabindex="0">
 
+ 
+
       <div class="orbitra-product-gallery__stage">
 
         <div class="orbitra-product-gallery__track">
+
+ 
 
           {% for i in (1..7) %}
 
@@ -44,7 +48,7 @@
 
                 alt="Orbitra LED Flying Orb product image {{ i }}"
 
-                {% unless forloop.first %}loading="lazy"{% endunless %}
+                loading="lazy"
 
                 width="1200"
 
@@ -55,6 +59,8 @@
             </div>
 
           {% endfor %}
+
+ 
 
         </div>
 
@@ -112,6 +118,8 @@
 
       <div class="orbitra-product-gallery__thumbnails" aria-label="Product images">
 
+ 
+
         {% for i in (1..7) %}
 
           <button
@@ -147,6 +155,8 @@
           </button>
 
         {% endfor %}
+
+ 
 
       </div>
 
@@ -212,7 +222,11 @@
 
       {% if orbitra_product != blank %}
 
+ 
+
         {% form 'product', orbitra_product, class: 'orbitra-product-form', data-reveal: '' %}
+
+ 
 
           <input
 
@@ -318,15 +332,23 @@
 
           {{ form | payment_button }}
 
+ 
+
         {% endform %}
 
+ 
+
       {% else %}
+
+ 
 
         <div class="orbitra-product__setup orbitra-glass">
 
           Select the Orbitra product in this section's Shopify theme settings.
 
         </div>
+
+ 
 
       {% endif %}
 
@@ -338,7 +360,11 @@
 
       </p>
 
+ 
+
     </div>
+
+ 
 
   </div>
 

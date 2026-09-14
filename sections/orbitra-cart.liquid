@@ -1,241 +1,460 @@
 <section class="orbitra-cart">
+
   <div class="orbitra-container orbitra-cart__container">
 
+ 
+
     <div class="orbitra-cart__header">
+
       <p class="orbitra-eyebrow">YOUR ORBITRA</p>
 
+ 
+
       <h1 class="orbitra-cart__title">
+
         Your cart.
+
       </h1>
 
+ 
+
       <p class="orbitra-cart__subtitle">
+
         You're one step away from launch.
+
       </p>
+
     </div>
+
+ 
 
     {% if cart.item_count > 0 %}
 
+ 
+
       <form
+
         action="{{ routes.cart_url }}"
+
         method="post"
+
         class="orbitra-cart__form"
+
       >
+
+ 
 
         <div class="orbitra-cart__layout">
 
-          <!-- CART ITEMS -->
+ 
+
           <div class="orbitra-cart__items">
+
+ 
 
             {% for item in cart.items %}
 
+ 
+
               <article class="orbitra-cart-item">
 
-                <!-- CUSTOM ORBITRA CART IMAGE -->
+ 
+
                 <div class="orbitra-cart-item__image">
 
+ 
+
                   <img
+
                     src="{{ 'orbita-1.png' | asset_url }}"
+
                     alt="Orbitra LED Flying Orb"
+
                     width="700"
+
                     height="700"
+
                     loading="lazy"
+
                   >
 
+ 
+
                 </div>
+
+ 
 
                 <div class="orbitra-cart-item__content">
 
+ 
+
                   <div class="orbitra-cart-item__top">
+
+ 
 
                     <div>
 
+ 
+
                       <p class="orbitra-cart-item__eyebrow">
+
                         ORBITRA
+
                       </p>
 
+ 
+
                       <h2 class="orbitra-cart-item__title">
+
                         {{ item.product.title }}
+
                       </h2>
 
+ 
+
                       {% unless item.variant.title == 'Default Title' %}
+
                         <p class="orbitra-cart-item__variant">
+
                           {{ item.variant.title }}
+
                         </p>
+
                       {% endunless %}
+
+ 
 
                     </div>
 
+ 
+
                     <p class="orbitra-cart-item__price">
+
                       {{ item.final_line_price | money }}
+
                     </p>
 
+ 
+
                   </div>
+
+ 
 
                   <div class="orbitra-cart-item__bottom">
 
+ 
+
                     <div class="orbitra-cart-item__quantity">
 
+ 
+
                       <label for="Quantity-{{ forloop.index }}">
+
                         Quantity
+
                       </label>
+
+ 
 
                       <div class="orbitra-cart-item__quantity-control">
 
+ 
+
                         <button
+
                           type="button"
+
                           class="orbitra-cart-item__qty-button"
+
                           data-cart-minus
+
                           aria-label="Decrease quantity"
+
                         >
+
                           −
+
                         </button>
+
+ 
 
                         <input
+
                           id="Quantity-{{ forloop.index }}"
+
                           class="orbitra-cart-item__qty-input"
+
                           type="number"
+
                           name="updates[]"
+
                           value="{{ item.quantity }}"
+
                           min="0"
+
                           data-cart-quantity
+
                         >
 
+ 
+
                         <button
+
                           type="button"
+
                           class="orbitra-cart-item__qty-button"
+
                           data-cart-plus
+
                           aria-label="Increase quantity"
+
                         >
+
                           +
+
                         </button>
+
+ 
 
                       </div>
 
+ 
+
                     </div>
 
+ 
+
                     <a
+
                       href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0"
+
                       class="orbitra-cart-item__remove"
+
                     >
+
                       Remove
+
                     </a>
+
+ 
 
                   </div>
 
+ 
+
                 </div>
+
+ 
 
               </article>
 
+ 
+
             {% endfor %}
 
+ 
+
             <button
+
               type="submit"
+
               name="update"
+
               class="orbitra-cart__update"
+
             >
+
               Update cart
+
             </button>
+
+ 
 
           </div>
 
+ 
 
-          <!-- ORDER SUMMARY -->
           <aside class="orbitra-cart-summary">
 
+ 
+
             <p class="orbitra-cart-summary__eyebrow">
+
               ORDER SUMMARY
+
             </p>
+
+ 
 
             <div class="orbitra-cart-summary__row">
+
               <span>Subtotal</span>
+
               <strong>{{ cart.total_price | money }}</strong>
+
             </div>
 
+ 
+
             <p class="orbitra-cart-summary__shipping">
+
               Shipping and taxes are calculated at checkout.
+
             </p>
 
+ 
+
             <button
+
               type="submit"
+
               name="checkout"
+
               class="orbitra-cart-summary__checkout"
+
             >
+
               Continue to checkout
+
             </button>
 
+ 
+
             <a
-              href="/#shop"
+
+              href="/#shop-orbitra"
+
               class="orbitra-cart-summary__continue"
+
             >
+
               ← Continue shopping
+
             </a>
+
+ 
 
             <div class="orbitra-cart-summary__trust">
 
-              <div>
-                <span class="orbitra-cart-summary__dot"></span>
-                Secure Shop checkout
-              </div>
+ 
 
               <div>
+
                 <span class="orbitra-cart-summary__dot"></span>
-                Order tracking after shipment
+
+                Secure Shopify checkout
+
               </div>
+
+ 
+
+              <div>
+
+                <span class="orbitra-cart-summary__dot"></span>
+
+                Order tracking after shipment
+
+              </div>
+
+ 
 
             </div>
 
+ 
+
           </aside>
+
+ 
 
         </div>
 
+ 
+
       </form>
 
+ 
 
     {% else %}
 
-      <!-- EMPTY CART -->
+ 
+
       <div class="orbitra-cart-empty">
+
+ 
 
         <div class="orbitra-cart-empty__orb"></div>
 
+ 
+
         <p class="orbitra-eyebrow">
+
           NOTHING IN ORBIT
+
         </p>
+
+ 
 
         <h2>
+
           Your cart is empty.
+
         </h2>
 
+ 
+
         <p>
+
           Orbitra is waiting for its next flight.
+
         </p>
 
+ 
+
         <a
-          href="/#shop"
+
+          href="/#shop-orbitra"
+
           class="orbitra-cart-empty__button"
+
         >
+
           Explore Orbitra
+
         </a>
+
+ 
 
       </div>
 
+ 
+
     {% endif %}
 
+ 
+
   </div>
+
 </section>
 
+ 
 
 <script>
+
   document.querySelectorAll('.orbitra-cart-item').forEach((item) => {
 
+ 
+
     const input = item.querySelector('[data-cart-quantity]');
+
     const minus = item.querySelector('[data-cart-minus]');
+
     const plus = item.querySelector('[data-cart-plus]');
+
+ 
 
     if (!input) return;
 
-
-    /* DECREASE QUANTITY */
+ 
 
     if (minus) {
 
@@ -243,16 +462,19 @@
 
         const current = parseInt(input.value || '0', 10);
 
+ 
+
         if (current > 0) {
+
           input.value = current - 1;
+
         }
 
       });
 
     }
 
-
-    /* INCREASE QUANTITY */
+ 
 
     if (plus) {
 
@@ -266,13 +488,22 @@
 
     }
 
+ 
+
   });
+
 </script>
 
+ 
 
 {% schema %}
+
 {
+
   "name": "Orbitra Cart",
+
   "settings": []
+
 }
+
 {% endschema %}

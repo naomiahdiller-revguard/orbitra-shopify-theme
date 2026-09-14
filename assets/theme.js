@@ -1,682 +1,741 @@
-document.addEventListener("DOMContentLoaded", () => {
+(() => {
+  "use strict";
 
   const reduceMotion = window.matchMedia(
-
     "(prefers-reduced-motion: reduce)"
-
   ).matches;
 
- 
 
-  /* =========================
-
+  /* =========================================================
      SCROLL REVEALS
-
-  ========================= */
-
- 
+     ========================================================= */
 
   const revealElements = document.querySelectorAll("[data-reveal]");
 
- 
-
-  if (reduceMotion || !("IntersectionObserver" in window)) {
-
+  if (
+    reduceMotion ||
+    !("IntersectionObserver" in window)
+  ) {
     revealElements.forEach((element) => {
-
       element.classList.add("is-visible");
-
     });
-
   } else {
-
     const revealObserver = new IntersectionObserver(
-
       (entries, observer) => {
-
         entries.forEach((entry) => {
-
           if (!entry.isIntersecting) return;
 
- 
-
           entry.target.classList.add("is-visible");
-
           observer.unobserve(entry.target);
-
         });
-
       },
-
       {
-
         threshold: 0.12,
-
-        rootMargin: "0px 0px -40px 0px",
-
+        rootMargin: "0px 0px -40px 0px"
       }
-
     );
-
- 
 
     revealElements.forEach((element) => {
-
       revealObserver.observe(element);
-
     });
-
   }
 
- 
 
-  /* =========================
-
+  /* =========================================================
      HERO ORB INTERACTION
-
-  ========================= */
-
- 
+     ========================================================= */
 
   const hero = document.querySelector(".orbitra-hero");
-
   const orb = document.querySelector("[data-orbitra-orb]");
 
- 
-
-  if (hero && orb && !reduceMotion && window.matchMedia("(pointer: fine)").matches) {
-
-    let targetX = 0;
-
-    let targetY = 0;
-
-    let currentX = 0;
-
-    let currentY = 0;
-
+  if (
+    hero &&
+    orb &&
+    !reduceMotion &&
+    window.matchMedia("(pointer: fine)").matches
+  ) {
     let animationFrame = null;
 
- 
+    let currentX = 0;
+    let currentY = 0;
 
-    const updateOrb = () => {
+    let targetX = 0;
+    let targetY = 0;
 
-      currentX += (targetX - currentX) * 0.055;
 
-      currentY += (targetY - currentY) * 0.055;
+    const animateOrb = () => {
+      currentX += (targetX - currentX) * 0.12;
+      currentY += (targetY - currentY) * 0.12;
 
- 
-
-      orb.style.setProperty("--mouse-x", `${currentX}px`);
-
-      orb.style.setProperty("--mouse-y", `${currentY}px`);
-
- 
-
-      animationFrame = requestAnimationFrame(updateOrb);
-
-    };
-
- 
-
-    hero.addEventListener("pointermove", (event) => {
-
-      const bounds = hero.getBoundingClientRect();
-
-      const x = (event.clientX - bounds.left) / bounds.width - 0.5;
-
-      const y = (event.clientY - bounds.top) / bounds.height - 0.5;
-
- 
-
-      targetX = x * 24;
-
-      targetY = y * 18;
-
-    });
-
- 
-
-    hero.addEventListener("pointerleave", () => {
-
-      targetX = 0;
-
-      targetY = 0;
-
-    });
-
- 
-
-    animationFrame = requestAnimationFrame(updateOrb);
-
- 
-
-    window.addEventListener("pagehide", () => {
-
-      if (animationFrame) cancelAnimationFrame(animationFrame);
-
-    });
-
-  }
-
- 
-
-  /* =========================
-
-     HERO SCROLL DEPTH
-
-  ========================= */
-
- 
-
-  if (hero && !reduceMotion) {
-
-    let ticking = false;
-
- 
-
-    const updateScrollDepth = () => {
-
-      const heroRect = hero.getBoundingClientRect();
-
-      const progress = Math.min(
-
-        Math.max(-heroRect.top / heroRect.height, 0),
-
-        1
-
+      orb.style.setProperty(
+        "--mouse-x",
+        `${currentX.toFixed(2)}px`
       );
 
- 
+      orb.style.setProperty(
+        "--mouse-y",
+        `${currentY.toFixed(2)}px`
+      );
 
-      hero.style.setProperty("--hero-scroll", progress.toFixed(3));
+      const distance =
+        Math.abs(targetX - currentX) +
+        Math.abs(targetY - currentY);
 
-      ticking = false;
-
+      if (distance > 0.1) {
+        animationFrame = requestAnimationFrame(animateOrb);
+      } else {
+        animationFrame = null;
+      }
     };
 
- 
+
+    const requestOrbAnimation = () => {
+      if (animationFrame === null) {
+        animationFrame = requestAnimationFrame(animateOrb);
+      }
+    };
+
+
+    hero.addEventListener(
+      "pointermove",
+      (event) => {
+        const bounds = hero.getBoundingClientRect();
+
+        const x =
+          (event.clientX - bounds.left) /
+            bounds.width -
+          0.5;
+
+        const y =
+          (event.clientY - bounds.top) /
+            bounds.height -
+          0.5;
+
+        targetX = x * 24;
+        targetY = y * 18;
+
+        requestOrbAnimation();
+      },
+      {
+        passive: true
+      }
+    );
+
+
+    hero.addEventListener(
+      "pointerleave",
+      () => {
+        targetX = 0;
+        targetY = 0;
+
+        requestOrbAnimation();
+      },
+      {
+        passive: true
+      }
+    );
+
 
     window.addEventListener(
-
-      "scroll",
-
+      "pagehide",
       () => {
-
-        if (!ticking) {
-
-          requestAnimationFrame(updateScrollDepth);
-
-          ticking = true;
-
+        if (animationFrame !== null) {
+          cancelAnimationFrame(animationFrame);
         }
-
       },
-
-      { passive: true }
-
+      {
+        once: true
+      }
     );
-
- 
-
-    updateScrollDepth();
-
   }
 
- 
 
-  /* =========================
+  /* =========================================================
+     HERO SCROLL DEPTH
+     ========================================================= */
 
-     PRODUCT MEDIA GALLERY
+  if (hero && !reduceMotion) {
+    let ticking = false;
+    let heroVisible = true;
 
-  ========================= */
 
- 
-
-  document.querySelectorAll("[data-orbitra-gallery]").forEach((gallery) => {
-
-    const track = gallery.querySelector("[data-gallery-track]");
-
-    const slides = Array.from(gallery.querySelectorAll("[data-gallery-slide]"));
-
-    const thumbs = Array.from(gallery.querySelectorAll("[data-gallery-thumb]"));
-
-    const prev = gallery.querySelector("[data-gallery-prev]");
-
-    const next = gallery.querySelector("[data-gallery-next]");
-
-    const currentLabel = gallery.querySelector("[data-gallery-current]");
-
- 
-
-    if (!track || slides.length === 0) return;
-
- 
-
-    let activeIndex = 0;
-
-    let scrollTimer = null;
-
- 
-
-    const pauseInactiveVideos = () => {
-
-      slides.forEach((slide, index) => {
-
-        if (index === activeIndex) return;
-
- 
-
-        slide.querySelectorAll("video").forEach((video) => {
-
-          video.pause();
-
-        });
-
-      });
-
-    };
-
- 
-
-    const setActive = (index, shouldScroll = true) => {
-
-      activeIndex = Math.max(0, Math.min(index, slides.length - 1));
-
- 
-
-      slides.forEach((slide, slideIndex) => {
-
-        slide.classList.toggle("is-active", slideIndex === activeIndex);
-
-      });
-
- 
-
-      thumbs.forEach((thumb, thumbIndex) => {
-
-        const isActive = thumbIndex === activeIndex;
-
-        thumb.classList.toggle("is-active", isActive);
-
-        thumb.setAttribute("aria-current", isActive ? "true" : "false");
-
-      });
-
- 
-
-      if (currentLabel) {
-
-        currentLabel.textContent = String(activeIndex + 1);
-
+    const updateScrollDepth = () => {
+      if (!heroVisible) {
+        ticking = false;
+        return;
       }
 
- 
+      const heroRect =
+        hero.getBoundingClientRect();
 
-      if (shouldScroll) {
+      const progress = Math.min(
+        Math.max(
+          -heroRect.top / heroRect.height,
+          0
+        ),
+        1
+      );
 
-        slides[activeIndex].scrollIntoView({
+      hero.style.setProperty(
+        "--hero-scroll",
+        progress.toFixed(3)
+      );
 
-          behavior: reduceMotion ? "auto" : "smooth",
+      ticking = false;
+    };
 
-          block: "nearest",
 
-          inline: "start",
+    const requestScrollUpdate = () => {
+      if (
+        !ticking &&
+        heroVisible
+      ) {
+        ticking = true;
 
-        });
+        requestAnimationFrame(
+          updateScrollDepth
+        );
+      }
+    };
 
- 
 
-        if (thumbs[activeIndex]) {
+    if ("IntersectionObserver" in window) {
+      const heroObserver =
+        new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              heroVisible =
+                entry.isIntersecting;
 
-          thumbs[activeIndex].scrollIntoView({
+              if (heroVisible) {
+                requestScrollUpdate();
+              }
+            });
+          },
+          {
+            rootMargin: "100px 0px"
+          }
+        );
 
-            behavior: reduceMotion ? "auto" : "smooth",
+      heroObserver.observe(hero);
+    }
 
-            block: "nearest",
 
-            inline: "center",
+    window.addEventListener(
+      "scroll",
+      requestScrollUpdate,
+      {
+        passive: true
+      }
+    );
 
-          });
+    requestScrollUpdate();
+  }
 
+
+  /* =========================================================
+     STORY VIDEO
+     ========================================================= */
+
+  const storyVideo = document.querySelector(
+    "[data-orbitra-story-video], .orbitra-story__video"
+  );
+
+  if (storyVideo) {
+
+    /*
+      Pause the video while it is far outside the viewport.
+      This reduces unnecessary video decoding and CPU/GPU work.
+    */
+
+    if (
+      "IntersectionObserver" in window &&
+      !reduceMotion
+    ) {
+      const videoObserver =
+        new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const playPromise =
+                  storyVideo.play();
+
+                if (
+                  playPromise &&
+                  typeof playPromise.catch ===
+                    "function"
+                ) {
+                  playPromise.catch(() => {
+                    /*
+                      Autoplay may be blocked by
+                      browser settings.
+                    */
+                  });
+                }
+              } else {
+                storyVideo.pause();
+              }
+            });
+          },
+          {
+            threshold: 0.05,
+            rootMargin: "150px 0px"
+          }
+        );
+
+      videoObserver.observe(storyVideo);
+    }
+  }
+
+
+  /* =========================================================
+     STORY VIDEO SOUND TOGGLE
+     ========================================================= */
+
+  const soundToggle =
+    document.querySelector(
+      "[data-orbitra-sound-toggle]"
+    );
+
+  const soundLabel =
+    document.querySelector(
+      "[data-orbitra-sound-label]"
+    );
+
+  if (
+    storyVideo &&
+    soundToggle
+  ) {
+    const updateSoundButton = () => {
+      const muted = storyVideo.muted;
+
+      soundToggle.setAttribute(
+        "aria-pressed",
+        muted ? "false" : "true"
+      );
+
+      soundToggle.setAttribute(
+        "aria-label",
+        muted
+          ? "Turn video sound on"
+          : "Turn video sound off"
+      );
+
+      if (soundLabel) {
+        soundLabel.textContent =
+          muted
+            ? "Sound on"
+            : "Sound off";
+      }
+    };
+
+
+    soundToggle.addEventListener(
+      "click",
+      () => {
+        storyVideo.muted =
+          !storyVideo.muted;
+
+        if (storyVideo.paused) {
+          const playPromise =
+            storyVideo.play();
+
+          if (
+            playPromise &&
+            typeof playPromise.catch ===
+              "function"
+          ) {
+            playPromise.catch(() => {});
+          }
         }
 
+        updateSoundButton();
       }
-
- 
-
-      pauseInactiveVideos();
-
-    };
-
- 
-
-    thumbs.forEach((thumb, index) => {
-
-      thumb.addEventListener("click", () => setActive(index));
-
-    });
-
- 
-
-    if (prev) {
-
-      prev.addEventListener("click", () => {
-
-        const nextIndex = activeIndex === 0 ? slides.length - 1 : activeIndex - 1;
-
-        setActive(nextIndex);
-
-      });
-
-    }
-
- 
-
-    if (next) {
-
-      next.addEventListener("click", () => {
-
-        const nextIndex = activeIndex === slides.length - 1 ? 0 : activeIndex + 1;
-
-        setActive(nextIndex);
-
-      });
-
-    }
-
- 
-
-    track.addEventListener(
-
-      "scroll",
-
-      () => {
-
-        window.clearTimeout(scrollTimer);
-
- 
-
-        scrollTimer = window.setTimeout(() => {
-
-          const trackRect = track.getBoundingClientRect();
-
- 
-
-          let closestIndex = 0;
-
-          let closestDistance = Number.POSITIVE_INFINITY;
-
- 
-
-          slides.forEach((slide, index) => {
-
-            const rect = slide.getBoundingClientRect();
-
-            const distance = Math.abs(rect.left - trackRect.left);
-
- 
-
-            if (distance < closestDistance) {
-
-              closestDistance = distance;
-
-              closestIndex = index;
-
-            }
-
-          });
-
- 
-
-          setActive(closestIndex, false);
-
-        }, 80);
-
-      },
-
-      { passive: true }
-
     );
 
- 
-
-    setActive(0, false);
-
-  });
-
- 
-
-  /* =========================
-
-     QUANTITY CONTROLS
-
-  ========================= */
-
- 
-
-  document.querySelectorAll(".orbitra-quantity").forEach((control) => {
-
-    const input = control.querySelector("[data-quantity-input]");
-
-    const minus = control.querySelector("[data-quantity-minus]");
-
-    const plus = control.querySelector("[data-quantity-plus]");
-
- 
-
-    if (!input || !minus || !plus) return;
-
- 
-
-    minus.addEventListener("click", () => {
-
-      const current = Number.parseInt(input.value, 10) || 1;
-
-      input.value = Math.max(1, current - 1);
-
-    });
-
- 
-
-    plus.addEventListener("click", () => {
-
-      const current = Number.parseInt(input.value, 10) || 1;
-
-      input.value = current + 1;
-
-    });
-
-  });
-
-});
-
- 
-
-/* =========================================================
-
-   ORBITRA CUSTOM PRODUCT GALLERY
-
-   ========================================================= */
-
- 
-
-document.querySelectorAll('[data-product-gallery]').forEach((gallery) => {
-
-  const slides = Array.from(gallery.querySelectorAll('[data-gallery-slide]'));
-
-  const thumbnails = Array.from(gallery.querySelectorAll('[data-gallery-thumbnail]'));
-
-  const previousButton = gallery.querySelector('[data-gallery-previous]');
-
-  const nextButton = gallery.querySelector('[data-gallery-next]');
-
-  const currentCounter = gallery.querySelector('[data-gallery-current]');
-
- 
-
-  if (!slides.length) return;
-
- 
-
-  let currentIndex = 0;
-
-  let touchStartX = 0;
-
-  let touchEndX = 0;
-
- 
-
-  const showSlide = (index) => {
-
-    if (index < 0) index = slides.length - 1;
-
-    if (index >= slides.length) index = 0;
-
- 
-
-    currentIndex = index;
-
- 
-
-    slides.forEach((slide, slideIndex) => {
-
-      slide.classList.toggle('is-active', slideIndex === currentIndex);
-
-    });
-
- 
-
-    thumbnails.forEach((thumbnail, thumbnailIndex) => {
-
-      const isActive = thumbnailIndex === currentIndex;
-
-      thumbnail.classList.toggle('is-active', isActive);
-
- 
-
-      if (isActive) {
-
-        thumbnail.setAttribute('aria-current', 'true');
-
-        thumbnail.scrollIntoView({
-
-          behavior: 'smooth',
-
-          block: 'nearest',
-
-          inline: 'nearest'
-
-        });
-
-      } else {
-
-        thumbnail.removeAttribute('aria-current');
-
-      }
-
-    });
-
- 
-
-    if (currentCounter) currentCounter.textContent = currentIndex + 1;
-
-  };
-
- 
-
-  previousButton?.addEventListener('click', () => showSlide(currentIndex - 1));
-
-  nextButton?.addEventListener('click', () => showSlide(currentIndex + 1));
-
- 
-
-  thumbnails.forEach((thumbnail, index) => {
-
-    thumbnail.addEventListener('click', () => showSlide(index));
-
-  });
-
- 
-
-  gallery.addEventListener('keydown', (event) => {
-
-    if (event.key === 'ArrowLeft') showSlide(currentIndex - 1);
-
-    if (event.key === 'ArrowRight') showSlide(currentIndex + 1);
-
-  });
-
- 
-
-  gallery.addEventListener('touchstart', (event) => {
-
-    touchStartX = event.changedTouches[0].screenX;
-
-  }, { passive: true });
-
- 
-
-  gallery.addEventListener('touchend', (event) => {
-
-    touchEndX = event.changedTouches[0].screenX;
-
-    const swipeDistance = touchEndX - touchStartX;
-
- 
-
-    if (Math.abs(swipeDistance) < 45) return;
-
-    showSlide(swipeDistance < 0 ? currentIndex + 1 : currentIndex - 1);
-
-  }, { passive: true });
-
- 
-
-  showSlide(0);
-
-});
-
-/* =========================================================
-   ORBITRA STORY VIDEO SOUND
-   ========================================================= */
-
-document.querySelectorAll('[data-orbitra-sound-toggle]').forEach((button) => {
-  const videoShell = button.closest('.orbitra-story__video-shell');
-
-  if (!videoShell) return;
-
-  const video = videoShell.querySelector('[data-orbitra-story-video]');
-  const label = button.querySelector('[data-orbitra-sound-label]');
-
-  if (!video) return;
-
-  const updateSoundButton = () => {
-    const soundIsOn = !video.muted;
-
-    button.classList.toggle('is-unmuted', soundIsOn);
-    button.setAttribute('aria-pressed', String(soundIsOn));
-
-    button.setAttribute(
-      'aria-label',
-      soundIsOn ? 'Mute video' : 'Turn video sound on'
-    );
-
-    if (label) {
-      label.textContent = soundIsOn ? 'Sound off' : 'Sound on';
-    }
-  };
-
-
-  button.addEventListener('click', () => {
-    video.muted = !video.muted;
-
-    if (video.paused) {
-      video.play().catch(() => {});
-    }
 
     updateSoundButton();
-  });
+  }
 
 
-  updateSoundButton();
-});
+  /* =========================================================
+     CUSTOM PRODUCT GALLERY
+     ========================================================= */
+
+  document
+    .querySelectorAll(
+      "[data-product-gallery]"
+    )
+    .forEach((gallery) => {
+
+      const slides = Array.from(
+        gallery.querySelectorAll(
+          "[data-gallery-slide]"
+        )
+      );
+
+      const thumbnails = Array.from(
+        gallery.querySelectorAll(
+          "[data-gallery-thumbnail]"
+        )
+      );
+
+      const previousButton =
+        gallery.querySelector(
+          "[data-gallery-previous]"
+        );
+
+      const nextButton =
+        gallery.querySelector(
+          "[data-gallery-next]"
+        );
+
+      const currentCounter =
+        gallery.querySelector(
+          "[data-gallery-current]"
+        );
+
+
+      if (!slides.length) return;
+
+
+      let currentIndex = 0;
+
+      let touchStartX = 0;
+      let touchStartY = 0;
+
+
+      const showSlide = (index) => {
+
+        if (index < 0) {
+          index =
+            slides.length - 1;
+        }
+
+        if (
+          index >= slides.length
+        ) {
+          index = 0;
+        }
+
+
+        currentIndex = index;
+
+
+        slides.forEach(
+          (slide, slideIndex) => {
+
+            const isActive =
+              slideIndex ===
+              currentIndex;
+
+            slide.classList.toggle(
+              "is-active",
+              isActive
+            );
+
+            slide.setAttribute(
+              "aria-hidden",
+              isActive
+                ? "false"
+                : "true"
+            );
+          }
+        );
+
+
+        thumbnails.forEach(
+          (
+            thumbnail,
+            thumbnailIndex
+          ) => {
+
+            const isActive =
+              thumbnailIndex ===
+              currentIndex;
+
+            thumbnail.classList.toggle(
+              "is-active",
+              isActive
+            );
+
+
+            if (isActive) {
+
+              thumbnail.setAttribute(
+                "aria-current",
+                "true"
+              );
+
+
+              /*
+                Scroll only the thumbnail strip,
+                not the entire page.
+              */
+
+              thumbnail.scrollIntoView({
+                behavior:
+                  reduceMotion
+                    ? "auto"
+                    : "smooth",
+
+                block: "nearest",
+                inline: "nearest"
+              });
+
+            } else {
+
+              thumbnail.removeAttribute(
+                "aria-current"
+              );
+
+            }
+          }
+        );
+
+
+        if (currentCounter) {
+          currentCounter.textContent =
+            String(
+              currentIndex + 1
+            );
+        }
+      };
+
+
+      if (previousButton) {
+
+        previousButton.addEventListener(
+          "click",
+          () => {
+            showSlide(
+              currentIndex - 1
+            );
+          }
+        );
+
+      }
+
+
+      if (nextButton) {
+
+        nextButton.addEventListener(
+          "click",
+          () => {
+            showSlide(
+              currentIndex + 1
+            );
+          }
+        );
+
+      }
+
+
+      thumbnails.forEach(
+        (
+          thumbnail,
+          index
+        ) => {
+
+          thumbnail.addEventListener(
+            "click",
+            () => {
+              showSlide(index);
+            }
+          );
+
+        }
+      );
+
+
+      gallery.addEventListener(
+        "keydown",
+        (event) => {
+
+          if (
+            event.key ===
+            "ArrowLeft"
+          ) {
+            event.preventDefault();
+
+            showSlide(
+              currentIndex - 1
+            );
+          }
+
+
+          if (
+            event.key ===
+            "ArrowRight"
+          ) {
+            event.preventDefault();
+
+            showSlide(
+              currentIndex + 1
+            );
+          }
+
+        }
+      );
+
+
+      gallery.addEventListener(
+        "touchstart",
+        (event) => {
+
+          const touch =
+            event.changedTouches[0];
+
+          touchStartX =
+            touch.screenX;
+
+          touchStartY =
+            touch.screenY;
+
+        },
+        {
+          passive: true
+        }
+      );
+
+
+      gallery.addEventListener(
+        "touchend",
+        (event) => {
+
+          const touch =
+            event.changedTouches[0];
+
+          const touchEndX =
+            touch.screenX;
+
+          const touchEndY =
+            touch.screenY;
+
+
+          const horizontalDistance =
+            touchEndX -
+            touchStartX;
+
+          const verticalDistance =
+            touchEndY -
+            touchStartY;
+
+
+          /*
+            Ignore normal vertical page
+            scrolling.
+          */
+
+          if (
+            Math.abs(
+              horizontalDistance
+            ) <=
+            Math.abs(
+              verticalDistance
+            )
+          ) {
+            return;
+          }
+
+
+          if (
+            Math.abs(
+              horizontalDistance
+            ) < 45
+          ) {
+            return;
+          }
+
+
+          showSlide(
+            horizontalDistance < 0
+              ? currentIndex + 1
+              : currentIndex - 1
+          );
+
+        },
+        {
+          passive: true
+        }
+      );
+
+
+      showSlide(0);
+    });
+
+
+  /* =========================================================
+     PRODUCT QUANTITY CONTROLS
+     ========================================================= */
+
+  document
+    .querySelectorAll(
+      ".orbitra-quantity"
+    )
+    .forEach((control) => {
+
+      const input =
+        control.querySelector(
+          "[data-quantity-input]"
+        );
+
+      const minus =
+        control.querySelector(
+          "[data-quantity-minus]"
+        );
+
+      const plus =
+        control.querySelector(
+          "[data-quantity-plus]"
+        );
+
+
+      if (
+        !input ||
+        !minus ||
+        !plus
+      ) {
+        return;
+      }
+
+
+      minus.addEventListener(
+        "click",
+        () => {
+
+          const current =
+            Number.parseInt(
+              input.value,
+              10
+            ) || 1;
+
+          input.value =
+            Math.max(
+              1,
+              current - 1
+            );
+
+        }
+      );
+
+
+      plus.addEventListener(
+        "click",
+        () => {
+
+          const current =
+            Number.parseInt(
+              input.value,
+              10
+            ) || 1;
+
+          input.value =
+            current + 1;
+
+        }
+      );
+
+    });
+
+})();
