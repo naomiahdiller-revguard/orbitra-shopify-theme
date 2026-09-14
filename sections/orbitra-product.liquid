@@ -1,12 +1,12 @@
 {% liquid
 
-  assign featured_product = section.settings.product
+  assign orbitra_product = section.settings.product
 
  
 
-  if featured_product == blank and collections.all.products.size > 0
+  if orbitra_product == blank and collections.all.products.size > 0
 
-    assign featured_product = collections.all.products.first
+    assign orbitra_product = collections.all.products.first
 
   endif
 
@@ -18,21 +18,137 @@
 
   <div class="orbitra-container orbitra-product__grid">
 
-    <div class="orbitra-product__visual" data-reveal>
+ 
 
-      <div class="orbitra-product__glow" aria-hidden="true"></div>
+    <div class="orbitra-product-gallery" data-product-gallery data-reveal tabindex="0">
+
+      <div class="orbitra-product-gallery__stage">
+
+        <div class="orbitra-product-gallery__track">
+
+          {% for i in (1..7) %}
+
+            <div
+
+              class="orbitra-product-gallery__slide{% if forloop.first %} is-active{% endif %}"
+
+              data-gallery-slide
+
+              data-index="{{ forloop.index0 }}"
+
+            >
+
+              <img
+
+                src="{{ 'product-photo-' | append: i | append: '.png' | asset_url }}"
+
+                alt="Orbitra LED Flying Orb product image {{ i }}"
+
+                {% unless forloop.first %}loading="lazy"{% endunless %}
+
+                width="1200"
+
+                height="1200"
+
+              >
+
+            </div>
+
+          {% endfor %}
+
+        </div>
 
  
 
-      <img
+        <button
 
-        src="{{ 'orb-3.jpg' | asset_url }}"
+          class="orbitra-gallery-arrow orbitra-gallery-arrow--previous"
 
-        alt="Close-up view of the Orbitra LED flying orb"
+          type="button"
 
-        loading="lazy"
+          data-gallery-previous
 
-      >
+          aria-label="Previous product image"
+
+        >
+
+          <span aria-hidden="true">←</span>
+
+        </button>
+
+ 
+
+        <button
+
+          class="orbitra-gallery-arrow orbitra-gallery-arrow--next"
+
+          type="button"
+
+          data-gallery-next
+
+          aria-label="Next product image"
+
+        >
+
+          <span aria-hidden="true">→</span>
+
+        </button>
+
+ 
+
+        <div class="orbitra-gallery-counter" aria-live="polite">
+
+          <span data-gallery-current>1</span>
+
+          <span>/</span>
+
+          <span>7</span>
+
+        </div>
+
+      </div>
+
+ 
+
+      <div class="orbitra-product-gallery__thumbnails" aria-label="Product images">
+
+        {% for i in (1..7) %}
+
+          <button
+
+            class="orbitra-product-gallery__thumbnail{% if forloop.first %} is-active{% endif %}"
+
+            type="button"
+
+            data-gallery-thumbnail
+
+            data-index="{{ forloop.index0 }}"
+
+            aria-label="View product image {{ i }}"
+
+            {% if forloop.first %}aria-current="true"{% endif %}
+
+          >
+
+            <img
+
+              src="{{ 'product-photo-' | append: i | append: '.png' | asset_url }}"
+
+              alt=""
+
+              loading="lazy"
+
+              width="160"
+
+              height="160"
+
+            >
+
+          </button>
+
+        {% endfor %}
+
+      </div>
 
     </div>
 
@@ -52,17 +168,17 @@
 
  
 
-      {% if featured_product != blank %}
+      {% if orbitra_product != blank %}
 
         <div class="orbitra-product__price" data-reveal data-reveal-delay="2">
 
-          <span>{{ featured_product.price | money }}</span>
+          <span>{{ orbitra_product.price | money }}</span>
 
  
 
-          {% if featured_product.compare_at_price > featured_product.price %}
+          {% if orbitra_product.compare_at_price > orbitra_product.price %}
 
-            <s>{{ featured_product.compare_at_price | money }}</s>
+            <s>{{ orbitra_product.compare_at_price | money }}</s>
 
           {% endif %}
 
@@ -94,9 +210,9 @@
 
  
 
-      {% if featured_product != blank %}
+      {% if orbitra_product != blank %}
 
-        {% form 'product', featured_product, class: 'orbitra-product-form', data-reveal: '' %}
+        {% form 'product', orbitra_product, class: 'orbitra-product-form', data-reveal: '' %}
 
           <input
 
@@ -104,7 +220,7 @@
 
             name="id"
 
-            value="{{ featured_product.selected_or_first_available_variant.id }}"
+            value="{{ orbitra_product.selected_or_first_available_variant.id }}"
 
           >
 
@@ -178,7 +294,7 @@
 
             class="orbitra-button orbitra-product__add"
 
-            {% unless featured_product.selected_or_first_available_variant.available %}
+            {% unless orbitra_product.selected_or_first_available_variant.available %}
 
               disabled
 
@@ -186,7 +302,7 @@
 
           >
 
-            {% if featured_product.selected_or_first_available_variant.available %}
+            {% if orbitra_product.selected_or_first_available_variant.available %}
 
               Add to cart
 

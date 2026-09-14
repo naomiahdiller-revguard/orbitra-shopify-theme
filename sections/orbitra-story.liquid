@@ -2,49 +2,95 @@
 
   <div class="orbitra-container">
 
-    <div class="orbitra-story__intro">
+    <div class="orbitra-story__top">
 
-      <p class="orbitra-eyebrow" data-reveal>MEET ORBITRA</p>
+      <div class="orbitra-story__intro">
 
- 
-
-      <h2 class="orbitra-section-title" data-reveal data-reveal-delay="1">
-
-        Not just something you watch.
-
-        <span>Something you control.</span>
-
-      </h2>
+        <p class="orbitra-eyebrow" data-reveal>MEET ORBITRA</p>
 
  
 
-      <p class="orbitra-subtitle orbitra-story__lead" data-reveal data-reveal-delay="2">
+        <h2 class="orbitra-section-title" data-reveal data-reveal-delay="1">
 
-        Start the rotor, give Orbitra a controlled toss, and experiment with angle and direction
+          Not just something you watch.
 
-        to create different flight paths.
+          <span>Something you control.</span>
 
-      </p>
-
-    </div>
+        </h2>
 
  
 
-    <div class="orbitra-story__visual orbitra-glass" data-reveal>
+        <p class="orbitra-subtitle orbitra-story__lead" data-reveal data-reveal-delay="2">
 
-      <img
+          Start the rotor, give Orbitra a controlled toss, and experiment with angle and direction
 
-        src="{{ 'orb-2.jpg' | asset_url }}"
+          to create different flight paths.
 
-        alt="Orbitra LED flying orb glowing in blue and violet light"
+        </p>
 
-        loading="lazy"
+ 
 
-      >
+        <div class="orbitra-story__cue" data-reveal data-reveal-delay="3">
 
-      <div class="orbitra-story__visual-shade"></div>
+          <span class="orbitra-story__cue-dot"></span>
 
-      <p class="orbitra-story__visual-label">LIGHT IN MOTION</p>
+          <span>REAL ORBITRA FOOTAGE</span>
+
+        </div>
+
+      </div>
+
+ 
+
+      <div class="orbitra-story__visual orbitra-glass" data-reveal>
+
+        <video
+
+          class="orbitra-story__video"
+
+          autoplay
+
+          muted
+
+          loop
+
+          playsinline
+
+          preload="metadata"
+
+          poster="{{ 'orbita-1.png' | asset_url }}"
+
+          aria-label="Orbitra flying orb in action"
+
+        >
+
+          <source src="{{ 'orbita-custom-video-1.mp4' | asset_url }}" type="video/mp4">
+
+          <source src="{{ 'orbita-custom-video-1.mov' | asset_url }}" type="video/quicktime">
+
+          Your browser does not support HTML5 video.
+
+        </video>
+
+ 
+
+        <div class="orbitra-story__visual-shade" aria-hidden="true"></div>
+
+ 
+
+        <div class="orbitra-story__video-badge">
+
+          <span class="orbitra-story__video-badge-dot"></span>
+
+          IN MOTION
+
+        </div>
+
+ 
+
+        <p class="orbitra-story__visual-label">THROW · FLY · CATCH · REPEAT</p>
+
+      </div>
 
     </div>
 
@@ -104,37 +150,13 @@
 
     <div class="orbitra-spec-strip orbitra-glass" data-reveal>
 
-      <div>
+      <div><strong>6–8 MIN</strong><span>Typical flight time</span></div>
 
-        <strong>6–8 MIN</strong>
+      <div><strong>30–35 MIN</strong><span>Charging time</span></div>
 
-        <span>Typical flight time</span>
+      <div><strong>9.5 × 9.5 CM</strong><span>Compact size</span></div>
 
-      </div>
-
-      <div>
-
-        <strong>30–35 MIN</strong>
-
-        <span>Charging time</span>
-
-      </div>
-
-      <div>
-
-        <strong>9.5 × 9.5 CM</strong>
-
-        <span>Compact size</span>
-
-      </div>
-
-      <div>
-
-        <strong>USB</strong>
-
-        <span>Rechargeable</span>
-
-      </div>
+      <div><strong>USB</strong><span>Rechargeable</span></div>
 
     </div>
 
@@ -154,11 +176,7 @@
 
   "presets": [
 
-    {
-
-      "name": "Orbitra Story"
-
-    }
+    { "name": "Orbitra Story" }
 
   ]
 

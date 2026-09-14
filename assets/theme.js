@@ -226,6 +226,228 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* =========================
 
+     PRODUCT MEDIA GALLERY
+
+  ========================= */
+
+ 
+
+  document.querySelectorAll("[data-orbitra-gallery]").forEach((gallery) => {
+
+    const track = gallery.querySelector("[data-gallery-track]");
+
+    const slides = Array.from(gallery.querySelectorAll("[data-gallery-slide]"));
+
+    const thumbs = Array.from(gallery.querySelectorAll("[data-gallery-thumb]"));
+
+    const prev = gallery.querySelector("[data-gallery-prev]");
+
+    const next = gallery.querySelector("[data-gallery-next]");
+
+    const currentLabel = gallery.querySelector("[data-gallery-current]");
+
+ 
+
+    if (!track || slides.length === 0) return;
+
+ 
+
+    let activeIndex = 0;
+
+    let scrollTimer = null;
+
+ 
+
+    const pauseInactiveVideos = () => {
+
+      slides.forEach((slide, index) => {
+
+        if (index === activeIndex) return;
+
+ 
+
+        slide.querySelectorAll("video").forEach((video) => {
+
+          video.pause();
+
+        });
+
+      });
+
+    };
+
+ 
+
+    const setActive = (index, shouldScroll = true) => {
+
+      activeIndex = Math.max(0, Math.min(index, slides.length - 1));
+
+ 
+
+      slides.forEach((slide, slideIndex) => {
+
+        slide.classList.toggle("is-active", slideIndex === activeIndex);
+
+      });
+
+ 
+
+      thumbs.forEach((thumb, thumbIndex) => {
+
+        const isActive = thumbIndex === activeIndex;
+
+        thumb.classList.toggle("is-active", isActive);
+
+        thumb.setAttribute("aria-current", isActive ? "true" : "false");
+
+      });
+
+ 
+
+      if (currentLabel) {
+
+        currentLabel.textContent = String(activeIndex + 1);
+
+      }
+
+ 
+
+      if (shouldScroll) {
+
+        slides[activeIndex].scrollIntoView({
+
+          behavior: reduceMotion ? "auto" : "smooth",
+
+          block: "nearest",
+
+          inline: "start",
+
+        });
+
+ 
+
+        if (thumbs[activeIndex]) {
+
+          thumbs[activeIndex].scrollIntoView({
+
+            behavior: reduceMotion ? "auto" : "smooth",
+
+            block: "nearest",
+
+            inline: "center",
+
+          });
+
+        }
+
+      }
+
+ 
+
+      pauseInactiveVideos();
+
+    };
+
+ 
+
+    thumbs.forEach((thumb, index) => {
+
+      thumb.addEventListener("click", () => setActive(index));
+
+    });
+
+ 
+
+    if (prev) {
+
+      prev.addEventListener("click", () => {
+
+        const nextIndex = activeIndex === 0 ? slides.length - 1 : activeIndex - 1;
+
+        setActive(nextIndex);
+
+      });
+
+    }
+
+ 
+
+    if (next) {
+
+      next.addEventListener("click", () => {
+
+        const nextIndex = activeIndex === slides.length - 1 ? 0 : activeIndex + 1;
+
+        setActive(nextIndex);
+
+      });
+
+    }
+
+ 
+
+    track.addEventListener(
+
+      "scroll",
+
+      () => {
+
+        window.clearTimeout(scrollTimer);
+
+ 
+
+        scrollTimer = window.setTimeout(() => {
+
+          const trackRect = track.getBoundingClientRect();
+
+ 
+
+          let closestIndex = 0;
+
+          let closestDistance = Number.POSITIVE_INFINITY;
+
+ 
+
+          slides.forEach((slide, index) => {
+
+            const rect = slide.getBoundingClientRect();
+
+            const distance = Math.abs(rect.left - trackRect.left);
+
+ 
+
+            if (distance < closestDistance) {
+
+              closestDistance = distance;
+
+              closestIndex = index;
+
+            }
+
+          });
+
+ 
+
+          setActive(closestIndex, false);
+
+        }, 80);
+
+      },
+
+      { passive: true }
+
+    );
+
+ 
+
+    setActive(0, false);
+
+  });
+
+ 
+
+  /* =========================
+
      QUANTITY CONTROLS
 
   ========================= */
@@ -265,5 +487,151 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
   });
+
+});
+
+ 
+
+/* =========================================================
+
+   ORBITRA CUSTOM PRODUCT GALLERY
+
+   ========================================================= */
+
+ 
+
+document.querySelectorAll('[data-product-gallery]').forEach((gallery) => {
+
+  const slides = Array.from(gallery.querySelectorAll('[data-gallery-slide]'));
+
+  const thumbnails = Array.from(gallery.querySelectorAll('[data-gallery-thumbnail]'));
+
+  const previousButton = gallery.querySelector('[data-gallery-previous]');
+
+  const nextButton = gallery.querySelector('[data-gallery-next]');
+
+  const currentCounter = gallery.querySelector('[data-gallery-current]');
+
+ 
+
+  if (!slides.length) return;
+
+ 
+
+  let currentIndex = 0;
+
+  let touchStartX = 0;
+
+  let touchEndX = 0;
+
+ 
+
+  const showSlide = (index) => {
+
+    if (index < 0) index = slides.length - 1;
+
+    if (index >= slides.length) index = 0;
+
+ 
+
+    currentIndex = index;
+
+ 
+
+    slides.forEach((slide, slideIndex) => {
+
+      slide.classList.toggle('is-active', slideIndex === currentIndex);
+
+    });
+
+ 
+
+    thumbnails.forEach((thumbnail, thumbnailIndex) => {
+
+      const isActive = thumbnailIndex === currentIndex;
+
+      thumbnail.classList.toggle('is-active', isActive);
+
+ 
+
+      if (isActive) {
+
+        thumbnail.setAttribute('aria-current', 'true');
+
+        thumbnail.scrollIntoView({
+
+          behavior: 'smooth',
+
+          block: 'nearest',
+
+          inline: 'nearest'
+
+        });
+
+      } else {
+
+        thumbnail.removeAttribute('aria-current');
+
+      }
+
+    });
+
+ 
+
+    if (currentCounter) currentCounter.textContent = currentIndex + 1;
+
+  };
+
+ 
+
+  previousButton?.addEventListener('click', () => showSlide(currentIndex - 1));
+
+  nextButton?.addEventListener('click', () => showSlide(currentIndex + 1));
+
+ 
+
+  thumbnails.forEach((thumbnail, index) => {
+
+    thumbnail.addEventListener('click', () => showSlide(index));
+
+  });
+
+ 
+
+  gallery.addEventListener('keydown', (event) => {
+
+    if (event.key === 'ArrowLeft') showSlide(currentIndex - 1);
+
+    if (event.key === 'ArrowRight') showSlide(currentIndex + 1);
+
+  });
+
+ 
+
+  gallery.addEventListener('touchstart', (event) => {
+
+    touchStartX = event.changedTouches[0].screenX;
+
+  }, { passive: true });
+
+ 
+
+  gallery.addEventListener('touchend', (event) => {
+
+    touchEndX = event.changedTouches[0].screenX;
+
+    const swipeDistance = touchEndX - touchStartX;
+
+ 
+
+    if (Math.abs(swipeDistance) < 45) return;
+
+    showSlide(swipeDistance < 0 ? currentIndex + 1 : currentIndex - 1);
+
+  }, { passive: true });
+
+ 
+
+  showSlide(0);
 
 });

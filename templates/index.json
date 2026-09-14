@@ -1,35 +1,43 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
+
   "sections": {
+
     "hero": {
-      "type": "orbitra-hero",
-      "settings": {}
+
+      "type": "orbitra-hero"
+
     },
+
     "story": {
-      "type": "orbitra-story",
-      "settings": {}
+
+      "type": "orbitra-story"
+
     },
+
     "product": {
-      "type": "orbitra-product",
-      "settings": {}
+
+      "type": "orbitra-product"
+
     },
+
     "faq": {
-      "type": "orbitra-faq",
-      "settings": {}
+
+      "type": "orbitra-faq"
+
     }
+
   },
+
   "order": [
+
     "hero",
+
     "story",
+
     "product",
+
     "faq"
+
   ]
+
 }
