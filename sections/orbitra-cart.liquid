@@ -30,17 +30,16 @@
 
               <article class="orbitra-cart-item">
 
+                <!-- CUSTOM ORBITRA CART IMAGE -->
                 <div class="orbitra-cart-item__image">
 
-                  {% if item.image %}
-                    <img
-                      src="{{ item.image | image_url: width: 700 }}"
-                      alt="{{ item.product.title | escape }}"
-                      width="700"
-                      height="700"
-                      loading="lazy"
-                    >
-                  {% endif %}
+                  <img
+                    src="{{ 'orbita-1.png' | asset_url }}"
+                    alt="Orbitra LED Flying Orb"
+                    width="700"
+                    height="700"
+                    loading="lazy"
+                  >
 
                 </div>
 
@@ -194,6 +193,7 @@
 
     {% else %}
 
+      <!-- EMPTY CART -->
       <div class="orbitra-cart-empty">
 
         <div class="orbitra-cart-empty__orb"></div>
@@ -210,7 +210,10 @@
           Orbitra is waiting for its next flight.
         </p>
 
-        <a href="/#shop" class="orbitra-cart-empty__button">
+        <a
+          href="/#shop"
+          class="orbitra-cart-empty__button"
+        >
           Explore Orbitra
         </a>
 
@@ -224,28 +227,45 @@
 
 <script>
   document.querySelectorAll('.orbitra-cart-item').forEach((item) => {
+
     const input = item.querySelector('[data-cart-quantity]');
     const minus = item.querySelector('[data-cart-minus]');
     const plus = item.querySelector('[data-cart-plus]');
 
     if (!input) return;
 
+
+    /* DECREASE QUANTITY */
+
     if (minus) {
+
       minus.addEventListener('click', () => {
+
         const current = parseInt(input.value || '0', 10);
 
         if (current > 0) {
           input.value = current - 1;
         }
+
       });
+
     }
 
+
+    /* INCREASE QUANTITY */
+
     if (plus) {
+
       plus.addEventListener('click', () => {
+
         const current = parseInt(input.value || '0', 10);
+
         input.value = current + 1;
+
       });
+
     }
+
   });
 </script>
 
