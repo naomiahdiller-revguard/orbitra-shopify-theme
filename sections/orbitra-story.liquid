@@ -1,182 +1,45 @@
-<section class="orbitra-story orbitra-story--cta" id="how-it-works">
-
+<section class="orbitra-story" id="how-it-works">
   <div class="orbitra-container">
-
- 
-
-    <div class="orbitra-action-card orbitra-glass" data-reveal>
-
-      <div class="orbitra-action-card__copy">
-
+    <div class="orbitra-story__feature orbitra-glass" data-reveal>
+      <div class="orbitra-story__copy">
         <p class="orbitra-eyebrow">SEE IT IN ACTION</p>
-
- 
-
-        <h2 class="orbitra-section-title">
-
-          Watch Orbitra
-
-          <span>take flight.</span>
-
-        </h2>
-
- 
-
-        <p class="orbitra-subtitle orbitra-action-card__text">
-
-          See the throw, the curve, and the catch without loading the full video
-
-          on the homepage.
-
-        </p>
-
- 
-
-        <a
-
-          href="/pages/see-it-in-action"
-
-          class="orbitra-button orbitra-action-card__button"
-
-        >
-
-          Watch Orbitra in action
-
-          <span aria-hidden="true">→</span>
-
-        </a>
-
-      </div>
-
- 
-
-      <div class="orbitra-action-card__visual" aria-hidden="true">
-
-        <div class="orbitra-action-card__glow"></div>
-
- 
-
-        <img
-
-          src="{{ 'orbita-1.png' | asset_url }}"
-
-          alt=""
-
-          class="orbitra-action-card__image"
-
-          loading="lazy"
-
-          width="1200"
-
-          height="1200"
-
-        >
-
- 
-
-        <div class="orbitra-action-card__play">
-
-          <span>▶</span>
-
+        <h2 class="orbitra-section-title">Throw it. Guide it.<span>Watch it come back.</span></h2>
+        <p class="orbitra-subtitle orbitra-story__text">Orbitra turns a simple toss into glowing, hands-on flight. Change the angle of your throw to send it forward, curve it through the air, or guide it back toward you.</p>
+        <div class="orbitra-story__motion" aria-label="Throw, fly, catch, repeat">
+          <span>THROW</span><i></i><span>FLY</span><i></i><span>CATCH</span><i></i><span>REPEAT</span>
         </div>
-
       </div>
 
+      <div class="orbitra-video-shell orbitra-story__video-shell">
+        <div class="orbitra-video-frame" data-orbitra-video-frame>
+          <video class="orbitra-action-video" data-orbitra-story-video muted loop playsinline preload="none" poster="{{ 'orb-hero.jpg' | asset_url }}" aria-label="Orbitra flying orb in action">
+            <source data-src="{{ 'orbita-custom-video-1.mp4' | asset_url }}" type="video/mp4">
+            Your browser does not support HTML5 video.
+          </video>
+          <button type="button" class="orbitra-video-sound" data-orbitra-sound-toggle aria-pressed="false" aria-label="Turn video sound on">
+            <span class="orbitra-video-sound__icon" aria-hidden="true">♪</span>
+            <span data-orbitra-sound-label>Sound on</span>
+          </button>
+        </div>
+      </div>
     </div>
-
- 
 
     <div class="orbitra-steps">
-
-      <article class="orbitra-step" data-reveal>
-
-        <span class="orbitra-step__number">01</span>
-
-        <h3>Power it on.</h3>
-
-        <p>Switch on Orbitra, hold the center axis, and spin the wheel to start the rotor.</p>
-
-      </article>
-
- 
-
-      <article class="orbitra-step" data-reveal data-reveal-delay="1">
-
-        <span class="orbitra-step__number">02</span>
-
-        <h3>Give it a toss.</h3>
-
-        <p>Use a controlled throw and change the angle to explore different flight paths.</p>
-
-      </article>
-
- 
-
-      <article class="orbitra-step" data-reveal data-reveal-delay="2">
-
-        <span class="orbitra-step__number">03</span>
-
-        <h3>Guide the flight.</h3>
-
-        <p>Experiment with direction, distance, and timing while the LEDs light up the motion.</p>
-
-      </article>
-
- 
-
-      <article class="orbitra-step" data-reveal data-reveal-delay="3">
-
-        <span class="orbitra-step__number">04</span>
-
-        <h3>Catch. Repeat.</h3>
-
-        <p>Catch Orbitra, reset your throw, and try a new route, trick, or return path.</p>
-
-      </article>
-
+      <article class="orbitra-step" data-reveal><span class="orbitra-step__number">01</span><h3>Power it on.</h3><p>Switch on Orbitra, hold the center axis, and spin the wheel to start the rotor.</p></article>
+      <article class="orbitra-step" data-reveal data-reveal-delay="1"><span class="orbitra-step__number">02</span><h3>Give it a toss.</h3><p>Use a controlled throw and change the angle to explore different flight paths.</p></article>
+      <article class="orbitra-step" data-reveal data-reveal-delay="2"><span class="orbitra-step__number">03</span><h3>Guide the flight.</h3><p>Experiment with direction, distance, and timing while the LEDs light up the motion.</p></article>
+      <article class="orbitra-step" data-reveal data-reveal-delay="3"><span class="orbitra-step__number">04</span><h3>Catch. Repeat.</h3><p>Catch Orbitra, reset your throw, and try a new route, trick, or return path.</p></article>
     </div>
-
- 
 
     <div class="orbitra-spec-strip orbitra-glass" data-reveal>
-
       <div><strong>6–8 MIN</strong><span>Typical flight time</span></div>
-
       <div><strong>30–35 MIN</strong><span>Charging time</span></div>
-
       <div><strong>9.5 × 9.5 CM</strong><span>Compact size</span></div>
-
       <div><strong>USB</strong><span>Rechargeable</span></div>
-
     </div>
-
- 
-
   </div>
-
 </section>
 
- 
-
 {% schema %}
-
-{
-
-  "name": "Orbitra Story",
-
-  "settings": [],
-
-  "presets": [
-
-    {
-
-      "name": "Orbitra Story"
-
-    }
-
-  ]
-
-}
-
+{"name":"Orbitra Story","settings":[],"presets":[{"name":"Orbitra Story"}]}
 {% endschema %}
-
