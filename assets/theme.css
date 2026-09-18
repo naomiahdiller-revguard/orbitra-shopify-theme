@@ -5515,3 +5515,35 @@ button {
 .orbitra-video-sound__icon svg{display:block;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .orbitra-action-video{cursor:pointer}
 @media(max-width:760px){.orbitra-video-sound{width:40px;min-width:40px;padding:0}}
+
+
+/* Minimal hovering video sound icon */
+.orbitra-video-sound,
+.orbitra-video-sound:hover{
+  width:36px;
+  min-width:36px;
+  min-height:36px;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  transform:none;
+  color:#fff;
+  opacity:.9;
+  filter:drop-shadow(0 1px 3px rgba(0,0,0,.9));
+}
+.orbitra-video-sound:hover{opacity:1}
+.orbitra-video-sound:focus-visible{
+  outline:2px solid rgba(255,255,255,.95);
+  outline-offset:4px;
+  border-radius:3px;
+}
+.orbitra-video-sound__icon{width:25px;height:25px}
+@media(max-width:760px){
+  .orbitra-video-sound,
+  .orbitra-video-sound:hover{width:34px;min-width:34px;min-height:34px}
+  .orbitra-video-sound__icon{width:23px;height:23px}
+}
