@@ -15,7 +15,6 @@
     },
     "story": {
       "type": "orbitra-story",
-      "disabled": true,
       "settings": {}
     },
     "product": {
