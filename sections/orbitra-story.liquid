@@ -12,20 +12,24 @@
 
       <div class="orbitra-video-shell orbitra-story__video-shell">
         <div class="orbitra-video-frame" data-orbitra-video-frame>
-          <video class="orbitra-action-video" data-orbitra-story-video muted loop playsinline preload="none" poster="{{ 'orb-hero.jpg' | asset_url }}" aria-label="Orbitra flying orb in action">
+          <video class="orbitra-action-video" data-orbitra-story-video muted loop playsinline preload="none" aria-label="Orbitra flying orb in action">
             <source data-src="{{ 'orbita-custom-video-1.mp4' | asset_url }}" type="video/mp4">
             Your browser does not support HTML5 video.
           </video>
           <button type="button" class="orbitra-video-sound" data-orbitra-sound-toggle aria-pressed="false" aria-label="Turn video sound on">
-            <span class="orbitra-video-sound__icon" aria-hidden="true">♪</span>
-            <span data-orbitra-sound-label>Sound on</span>
+            <span class="orbitra-video-sound__icon" data-orbitra-muted-icon aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false"><path d="M11 5 6.8 8.5H3v7h3.8L11 19V5Z"/><path d="m16 9 5 6M21 9l-5 6"/></svg>
+            </span>
+            <span class="orbitra-video-sound__icon" data-orbitra-sound-icon aria-hidden="true" hidden>
+              <svg viewBox="0 0 24 24" focusable="false"><path d="M11 5 6.8 8.5H3v7h3.8L11 19V5Z"/><path d="M15 9.2a4 4 0 0 1 0 5.6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>
+            </span>
           </button>
         </div>
       </div>
     </div>
 
     <div class="orbitra-steps">
-      <article class="orbitra-step" data-reveal><span class="orbitra-step__number">01</span><h3>Power it on.</h3><p>Switch on Orbitra, hold the center axis, and spin the wheel to start the rotor.</p></article>
+      <article class="orbitra-step" data-reveal><span class="orbitra-step__number">01</span><h3>Power it on.</h3><p>Press the power button with the charging port facing up, then give Orbitra a quick wrist shake to start the blades spinning.</p></article>
       <article class="orbitra-step" data-reveal data-reveal-delay="1"><span class="orbitra-step__number">02</span><h3>Give it a toss.</h3><p>Use a controlled throw and change the angle to explore different flight paths.</p></article>
       <article class="orbitra-step" data-reveal data-reveal-delay="2"><span class="orbitra-step__number">03</span><h3>Guide the flight.</h3><p>Experiment with direction, distance, and timing while the LEDs light up the motion.</p></article>
       <article class="orbitra-step" data-reveal data-reveal-delay="3"><span class="orbitra-step__number">04</span><h3>Catch. Repeat.</h3><p>Catch Orbitra, reset your throw, and try a new route, trick, or return path.</p></article>
