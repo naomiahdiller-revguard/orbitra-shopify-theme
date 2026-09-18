@@ -5506,3 +5506,12 @@ button {
 .orbitra-story__video-shell .orbitra-action-video{object-fit:contain}
 @media(max-width:920px){.orbitra-story__feature{grid-template-columns:1fr}.orbitra-story__copy{max-width:720px}}
 @media(max-width:760px){.orbitra-story__feature{padding:26px 18px 18px;border-radius:22px}.orbitra-story__motion{gap:7px;font-size:.58rem;letter-spacing:.11em}.orbitra-story__video-shell{border-radius:16px}}
+
+
+/* Icon-only video sound control */
+.orbitra-video-sound{width:46px;min-width:46px;padding:0;justify-content:center;gap:0}
+.orbitra-video-sound__icon{display:grid;place-items:center;width:22px;height:22px}
+.orbitra-video-sound__icon[hidden]{display:none}
+.orbitra-video-sound__icon svg{display:block;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.orbitra-action-video{cursor:pointer}
+@media(max-width:760px){.orbitra-video-sound{width:40px;min-width:40px;padding:0}}
