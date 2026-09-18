@@ -70,8 +70,6 @@
 
           preload="metadata"
 
-          poster="{{ 'orbita-1.png' | asset_url }}"
-
           aria-label="Orbitra flying orb in action"
 
         >
@@ -90,25 +88,14 @@
 
  
 
-        <button
-
-          type="button"
-
-          class="orbitra-video-sound"
-
-          data-orbitra-sound-toggle
-
-          aria-pressed="false"
-
-          aria-label="Turn video sound on"
-
-        >
-
-          <span class="orbitra-video-sound__icon" aria-hidden="true">♪</span>
-
-          <span data-orbitra-sound-label>Sound on</span>
-
-        </button>
+        <button type="button" class="orbitra-video-sound" data-orbitra-sound-toggle aria-pressed="false" aria-label="Turn video sound on">
+            <span class="orbitra-video-sound__icon" data-orbitra-muted-icon aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false"><path d="M11 5 6.8 8.5H3v7h3.8L11 19V5Z"/><path d="m16 9 5 6M21 9l-5 6"/></svg>
+            </span>
+            <span class="orbitra-video-sound__icon" data-orbitra-sound-icon aria-hidden="true" hidden>
+              <svg viewBox="0 0 24 24" focusable="false"><path d="M11 5 6.8 8.5H3v7h3.8L11 19V5Z"/><path d="M15 9.2a4 4 0 0 1 0 5.6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>
+            </span>
+          </button>
 
  
 
