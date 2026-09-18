@@ -393,7 +393,8 @@
   document.querySelectorAll("[data-orbitra-story-video]").forEach((video) => {
     const frame = video.closest("[data-orbitra-video-frame]") || video.closest(".orbitra-video-frame") || video.parentElement;
     const soundToggle = frame?.querySelector("[data-orbitra-sound-toggle]");
-    const soundLabel = frame?.querySelector("[data-orbitra-sound-label]");
+    const mutedIcon = frame?.querySelector("[data-orbitra-muted-icon]");
+    const soundIcon = frame?.querySelector("[data-orbitra-sound-icon]");
     let sourceLoaded = Boolean(video.querySelector("source[src]"));
 
     const loadVideoSource = () => {
@@ -417,7 +418,8 @@
       const muted = video.muted;
       soundToggle.setAttribute("aria-pressed", muted ? "false" : "true");
       soundToggle.setAttribute("aria-label", muted ? "Turn video sound on" : "Turn video sound off");
-      if (soundLabel) soundLabel.textContent = muted ? "Sound on" : "Sound off";
+      if (mutedIcon) mutedIcon.hidden = !muted;
+      if (soundIcon) soundIcon.hidden = muted;
     };
 
     if (soundToggle) {
@@ -428,6 +430,12 @@
       });
       updateSoundButton();
     }
+
+    video.addEventListener("click", () => {
+      video.muted = !video.muted;
+      tryPlay();
+      updateSoundButton();
+    });
 
     if ("IntersectionObserver" in window) {
       const videoObserver = new IntersectionObserver((entries) => {
