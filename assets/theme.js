@@ -390,221 +390,58 @@
 
      ========================================================= */
 
- 
-
-  document
-
-    .querySelectorAll("[data-orbitra-story-video]")
-
-    .forEach((video) => {
-
- 
-
-      const container =
-
-        video.closest(".orbitra-video-frame") ||
-
-        video.parentElement;
-
- 
-
-      const soundToggle =
-
-        container?.querySelector(
-
-          "[data-orbitra-sound-toggle]"
-
-        );
-
- 
-
-      const soundLabel =
-
-        container?.querySelector(
-
-          "[data-orbitra-sound-label]"
-
-        );
-
- 
-
- 
-
-      const updateSoundButton = () => {
-
-        if (!soundToggle) return;
-
- 
-
-        const muted = video.muted;
-
- 
-
-        soundToggle.setAttribute(
-
-          "aria-pressed",
-
-          muted ? "false" : "true"
-
-        );
-
- 
-
-        soundToggle.setAttribute(
-
-          "aria-label",
-
-          muted
-
-            ? "Turn video sound on"
-
-            : "Turn video sound off"
-
-        );
-
- 
-
-        if (soundLabel) {
-
-          soundLabel.textContent =
-
-            muted
-
-              ? "Sound on"
-
-              : "Sound off";
-
-        }
-
-      };
-
- 
-
- 
-
-      if (soundToggle) {
-
-        soundToggle.addEventListener(
-
-          "click",
-
-          () => {
-
-            video.muted = !video.muted;
-
- 
-
-            if (video.paused) {
-
-              const playPromise = video.play();
-
- 
-
-              if (
-
-                playPromise &&
-
-                typeof playPromise.catch === "function"
-
-              ) {
-
-                playPromise.catch(() => {});
-
-              }
-
-            }
-
- 
-
-            updateSoundButton();
-
-          }
-
-        );
-
- 
-
+  document.querySelectorAll("[data-orbitra-story-video]").forEach((video) => {
+    const frame = video.closest("[data-orbitra-video-frame]") || video.closest(".orbitra-video-frame") || video.parentElement;
+    const soundToggle = frame?.querySelector("[data-orbitra-sound-toggle]");
+    const soundLabel = frame?.querySelector("[data-orbitra-sound-label]");
+    let sourceLoaded = Boolean(video.querySelector("source[src]"));
+
+    const loadVideoSource = () => {
+      if (sourceLoaded) return;
+      video.querySelectorAll("source[data-src]").forEach((source) => {
+        source.src = source.dataset.src;
+        source.removeAttribute("data-src");
+      });
+      video.load();
+      sourceLoaded = true;
+    };
+
+    const tryPlay = () => {
+      loadVideoSource();
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === "function") playPromise.catch(() => {});
+    };
+
+    const updateSoundButton = () => {
+      if (!soundToggle) return;
+      const muted = video.muted;
+      soundToggle.setAttribute("aria-pressed", muted ? "false" : "true");
+      soundToggle.setAttribute("aria-label", muted ? "Turn video sound on" : "Turn video sound off");
+      if (soundLabel) soundLabel.textContent = muted ? "Sound on" : "Sound off";
+    };
+
+    if (soundToggle) {
+      soundToggle.addEventListener("click", () => {
+        video.muted = !video.muted;
+        tryPlay();
         updateSoundButton();
+      });
+      updateSoundButton();
+    }
 
-      }
+    if ("IntersectionObserver" in window) {
+      const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) tryPlay();
+          else if (!video.paused) video.pause();
+        });
+      }, { threshold: 0.05, rootMargin: "600px 0px" });
+      videoObserver.observe(video);
+    } else {
+      tryPlay();
+    }
+  });
 
- 
-
- 
-
-      /*
-
-        The video only exists on the separate action page now.
-
-        Pause it when it is off screen to avoid wasting CPU/GPU.
-
-      */
-
- 
-
-      if (
-
-        "IntersectionObserver" in window &&
-
-        !reduceMotion
-
-      ) {
-
-        const videoObserver = new IntersectionObserver(
-
-          (entries) => {
-
-            entries.forEach((entry) => {
-
-              if (entry.isIntersecting) {
-
-                const playPromise = video.play();
-
- 
-
-                if (
-
-                  playPromise &&
-
-                  typeof playPromise.catch === "function"
-
-                ) {
-
-                  playPromise.catch(() => {});
-
-                }
-
-              } else {
-
-                video.pause();
-
-              }
-
-            });
-
-          },
-
-          {
-
-            threshold: 0.05,
-
-            rootMargin: "150px 0px"
-
-          }
-
-        );
-
- 
-
-        videoObserver.observe(video);
-
-      }
-
-    });
-
- 
-
- 
 
   /* =========================================================
 
